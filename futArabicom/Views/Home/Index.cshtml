@@ -4,5 +4,10 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
+    @using (Html.BeginForm("Search", "Home", FormMethod.Post))
+    {
+        <input type="text" name="query">
+        <input type="submit" value="Search">
+    }
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>

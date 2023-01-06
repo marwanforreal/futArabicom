@@ -23,6 +23,16 @@ namespace futArabicom.Controllers
             return View();
         }
 
+        public IActionResult Search(string query)
+        {
+            List<Player> players = new();
+
+            players.Add(new Player(1, "Marwan", "Real Madrid"));
+
+
+            return View("Search", players.FindAll(p => p.Name.Contains(query))); 
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
