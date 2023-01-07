@@ -32,5 +32,13 @@ namespace futArabicom.Controllers
             _context.SaveChanges(); 
             return View();
         }
+
+        [HttpGet]
+        public IActionResult Details(int id)
+        {
+            Player player = _context.Players.SingleOrDefault(p => p.Id == id);
+
+            return View("Details", player);
+        }
     }
 }
