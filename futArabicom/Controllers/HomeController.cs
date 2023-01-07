@@ -1,4 +1,5 @@
-﻿using futArabicom.Models;
+﻿using futArabicom.Data;
+using futArabicom.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,10 +8,12 @@ namespace futArabicom.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
         {
             _logger = logger;
+            _context = context; 
         }
 
         public IActionResult Index()
@@ -25,10 +28,7 @@ namespace futArabicom.Controllers
 
         public IActionResult Search(string query)
         {
-            List<Player> players = new();
-
-            players.Add(new Player(1, "Marwan", "Real Madrid"));
-
+            var players = _context.Players.ToList(); 
 
             return View("Search", players.FindAll(p => p.Name.Contains(query))); 
         }
