@@ -6,8 +6,13 @@
     <h1 class="display-4">Welcome</h1>
     @using (Html.BeginForm("Search", "Home", FormMethod.Post))
     {
-        <input type="text" name="query">
-        <input type="submit" value="Search">
+        /*<input type="text" name="query">
+        <input type="submit" value="Search">*/
+
+         <div class="input-group">
+            <input type="search" name="query" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+            <button type="submit" class="btn btn-outline-primary">Search</button>
+          </div>
     }
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
