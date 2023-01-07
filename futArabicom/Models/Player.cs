@@ -11,6 +11,11 @@ namespace futArabicom.Models
 
         public string? Club { get; set; }
 
+        public Player()
+        {
+
+        }
+
         public Player(int id, string name, string? club)
         {
             Id = id;

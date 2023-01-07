@@ -14,17 +14,23 @@ namespace futArabicom.Controllers
         }
         public IActionResult Index()
         {
-            //var data = _context.Players.ToList();
+            var data = _context.Players.ToList();
 
-            List<Player> players = new List<Player>();
+            return View("Index", data);
+        }
 
-            players.Add(new Player(1, "Marwan", "Real Madrid"));
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
 
-            players.Add(new Player(2, "Marvin", "Real Madrid"));
-
-            players.Add(new Player(3, "Marian", "Real Madrid"));
-
-            return View("Index", players);
+        [HttpPost]
+        public IActionResult Create(Player player)
+        {
+            _context.Players.Add(player);
+            _context.SaveChanges(); 
+            return View();
         }
     }
 }
