@@ -30,6 +30,11 @@ namespace futArabicom.Controllers
         {
             var players = _context.Players.ToList(); 
 
+            if(query == null)
+            {
+                query = "Marwan";
+            }
+
             return View("Search", players.FindAll(p => p.Name.Contains(query))); 
         }
 
