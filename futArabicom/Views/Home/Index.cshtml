@@ -3,16 +3,13 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+    <img src="~/Images/Logo.png" class="rounded mx-auto d-block" alt="FutArabi">
     @using (Html.BeginForm("Search", "Home", FormMethod.Post))
     {
-        /*<input type="text" name="query">
-        <input type="submit" value="Search">*/
-
-         <div class="input-group">
-            <input type="search" name="query" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-            <button type="submit" class="btn btn-outline-primary">Search</button>
+         <div class="input-group mt-4">
+            <input type="search" name="query" class="form-control rounded" placeholder="اسم اللاعب" aria-label="Search" aria-describedby="search-addon" />
+            <button type="submit" class="btn btn-outline-primary">البحث</button>
           </div>
     }
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p class="mt-4">لست عضواً؟ <a class="text-decoration-none" href="https://docs.microsoft.com/aspnet/core">سجّل الان</a>.</p>
 </div>
