@@ -46,5 +46,37 @@ namespace futArabicom.Controllers
 
             return View("Details", player);
         }
+
+        [HttpGet]
+        public IActionResult Edit(int? id)
+        {
+            if(id == null || id == 0)
+            {
+                return NotFound();
+            }
+
+            var player = _context.Players.SingleOrDefault(p =>p.Id == id);
+
+            if(player == null)
+            {
+                return NotFound();
+            }
+
+            return View(player);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Player player)
+        {
+
+            if (ModelState.IsValid)
+            {
+                _context.Players.Update(player);
+                _context.SaveChanges();
+                return View();
+            }
+
+            return View();
+        }
     }
 }
