@@ -28,12 +28,12 @@ namespace futArabicom.Controllers
         [HttpPost]
         public IActionResult Create(Player player)
         {
-            player.Pace = 99;
-            player.Defending = 99;
-            player.Shooting = 99;
-            player.Passing = 99;
-            player.Physical = 99;
-            player.Dribbling = 99;
+            player.Pace = 86;
+            player.Defending = 75;
+            player.Shooting = 60;
+            player.Passing = 69;
+            player.Physical = 80;
+            player.Dribbling = 59;
             _context.Players.Add(player);
             _context.SaveChanges(); 
             return View();
