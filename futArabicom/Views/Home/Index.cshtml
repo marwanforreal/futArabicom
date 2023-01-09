@@ -27,11 +27,13 @@
                 {
                     <div class="col-sm-2">
                         <!--<p class="display-4">@item.Name</p>-->
-                        <img id="trendingPlayerCard" src="~/Images/playerCard.png" class="rounded mx-auto d-block img-fluid" alt="FutArabi">
+                        <a href="@Url.Action("Details", "Players", new {  id=item.Id  })">
+                            <img id="trendingPlayerCard" src="~/Images/playerCard.png" class="rounded mx-auto d-block img-fluid" alt="FutArabi">
+                        </a>
                     </div>
                 }
             </div>
-    </div>
+        </div>
     }
 
 </div>
