@@ -1,2 +1,21 @@
-﻿body {
+﻿#playerCard {
+    height: 50%;
+    width: 70%;
+}
+
+#playerFace {
+    position: absolute;
+    width: 35%;
+    top: 16%;
+    right: 30%;
+}
+#trendingPlayerCard {
+}
+
+.bg-richBlack {
+    background-color: #042A2B;
+}
+
+.bg-minionYellow-text {
+    color: #F4E04D;
 }
