@@ -6,6 +6,14 @@
 
 <style>
     #trendingPlayerCard{}
+
+    .bg-richBlack{
+        background-color:#042A2B; 
+    }
+
+    .bg-minionYellow-text{
+        color: #F4E04D;
+    }
 </style>
 
 <div class="text-center">
@@ -21,8 +29,11 @@
 
     @if (Model != null)
     {
-        <div class="container">
-            <div class="row">
+        <div class="container bg-richBlack">
+            <div class="mb-3">
+                <span class="display-4 bg-minionYellow-text">تريند اللاعبين</span>
+            </div>
+            <div class="row g-0">
                 @foreach (var item in Model)
                 {
                     <div class="col-sm-2">
