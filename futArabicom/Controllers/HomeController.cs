@@ -19,7 +19,7 @@ namespace futArabicom.Controllers
         public IActionResult Index()
         {
             /*Trending players under the search bar list*/
-            var trendingPlayers = _context.Players.Take(6).ToList();
+            var trendingPlayers = _context.Players.Take(12).ToList();
 
             return View(trendingPlayers);
         }
