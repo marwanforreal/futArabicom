@@ -18,7 +18,10 @@ namespace futArabicom.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            /*Trending players under the search bar list*/
+            var trendingPlayers = _context.Players.Take(6).ToList();
+
+            return View(trendingPlayers);
         }
 
         public IActionResult Privacy()
@@ -37,6 +40,7 @@ namespace futArabicom.Controllers
 
             return View("Search", players.FindAll(p => p.Name.Contains(query))); 
         }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

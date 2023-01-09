@@ -1,6 +1,12 @@
-﻿@{
+﻿@model IEnumerable<futArabicom.Models.Player>
+
+@{
     ViewData["Title"] = "Home Page";
 }
+
+<style>
+    #trendingPlayerCard{}
+</style>
 
 <div class="text-center">
     <img src="~/Images/Logo.png" class="rounded mx-auto d-block img-fluid" alt="FutArabi">
@@ -12,4 +18,20 @@
           </div>
     }
     <p class="mt-4">لست عضواً؟ <a class="text-decoration-none" href="https://docs.microsoft.com/aspnet/core">سجّل الان</a>.</p>
+
+    @if (Model != null)
+    {
+        <div class="container">
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class="col-sm-2">
+                        <!--<p class="display-4">@item.Name</p>-->
+                        <img id="trendingPlayerCard" src="~/Images/playerCard.png" class="rounded mx-auto d-block img-fluid" alt="FutArabi">
+                    </div>
+                }
+            </div>
+    </div>
+    }
+
 </div>
