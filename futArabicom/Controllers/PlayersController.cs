@@ -1,6 +1,8 @@
 ﻿using futArabicom.Data;
 using futArabicom.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Buffers.Text;
+using System.Net.NetworkInformation;
 
 namespace futArabicom.Controllers
 {
@@ -26,7 +28,7 @@ namespace futArabicom.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Player player)
+        public IActionResult Create(Player player, IFormFile playerImage)
         {
             player.Pace = 86;
             player.Defending = 75;
@@ -34,9 +36,30 @@ namespace futArabicom.Controllers
             player.Passing = 69;
             player.Physical = 80;
             player.Dribbling = 59;
+
+            if(playerImage != null)
+            {
+                var imageData = TransformImageData(playerImage);
+                player.Image = imageData;
+            }
+            else
+            {
+                player.Image = new byte[0];
+            }
+
             _context.Players.Add(player);
             _context.SaveChanges(); 
             return View();
+        }
+
+        private byte[] TransformImageData(IFormFile playerImage)
+        {
+            MemoryStream ms = new MemoryStream();
+            playerImage.CopyTo(ms);
+            var imageData = ms.ToArray();
+            ms.Close();
+            ms.Dispose();
+            return imageData;
         }
 
         [HttpGet]
@@ -44,7 +67,25 @@ namespace futArabicom.Controllers
         {
             Player player = _context.Players.SingleOrDefault(p => p.Id == id);
 
+            if(player.Image != null)
+            {
+                var imageDataUrl = ExtractImageUrl(player);
+
+                ViewBag.imageUrl = imageDataUrl;
+            }
+
             return View("Details", player);
+        }
+
+        private string ExtractImageUrl(Player player)
+        {
+            var image = player.Image;
+            string imageBase64 = Convert.ToBase64String(image);
+
+            var url = string.Format("data: image / png; base64,{0}"
+            , imageBase64);
+
+            return url;
         }
 
         [HttpGet]
