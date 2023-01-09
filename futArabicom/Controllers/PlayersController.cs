@@ -82,7 +82,7 @@ namespace futArabicom.Controllers
             var image = player.Image;
             string imageBase64 = Convert.ToBase64String(image);
 
-            var url = string.Format("data: image / png; base64,{0}"
+            var url = string.Format("data:image/png; base64,{0}"
             , imageBase64);
 
             return url;
