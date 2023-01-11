@@ -2,6 +2,7 @@
 using futArabicom.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Buffers.Text;
+using System.Drawing;
 using System.Net.NetworkInformation;
 
 namespace futArabicom.Controllers
@@ -109,13 +110,19 @@ namespace futArabicom.Controllers
         [HttpPost]
         public IActionResult Edit(Player player)
         {
-
-            if (ModelState.IsValid)
+            if(player.Image == null)
             {
-                _context.Players.Update(player);
-                _context.SaveChanges();
+                player.Image = new byte[0];  
+            }
+
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState.Select(x => x.Value.Errors).Where(y => y.Count > 0).ToList();
                 return View();
             }
+
+            _context.Players.Update(player);
+            _context.SaveChanges();
 
             return View();
         }
