@@ -13,8 +13,85 @@
     <div class="row">
         <div class="col-sm-6 m-auto">
             <div class="p-2 bd-highlight position-relative">
-                <img id="playerCard" src="~/Images/playerCard.png" class="rounded mx-auto d-block img-fluid" alt="FutArabi">
+                <img id="playerCard" src="~/Images/playerCard.png" class="rounded mx-auto d-block" alt="FutArabi">
                 <img id="playerFace" class="align-items-center" src="@ViewBag.imageUrl" />
+
+                <!--I really hate this part, player name and stats and it needs to be fixed.-->
+                <div id="playerNameOnCard" class="h3" style="position:absolute;
+                            max-width: fit-content;
+                            max-height: fit-content;
+                            top:57%;
+                            container-type: inline-size;
+                            white-space: nowrap;
+                            right:38%;
+                            transform:translate(-50%, -50%);">@Model.Name</div>
+
+                <div id="playerPace" class="h4 fw-bold" style="position:absolute;
+                            max-width: fit-content;
+                            max-height: fit-content;
+                            top:65.5%;
+                            container-type: inline-size;
+                            white-space: nowrap;
+                            right:64%;
+                            transform:translate(-50%, -50%);">
+                    @Model.Pace
+                </div>
+
+                <div id="playerShooting" class="h4 fw-bold" style="position:absolute;
+                            max-width: fit-content;
+                            max-height: fit-content;
+                            top:71.5%;
+                            container-type: inline-size;
+                            white-space: nowrap;
+                            right:63.7%;
+                            transform:translate(-50%, -50%);">
+                    @Model.Shooting
+                </div>
+
+                <div id="playerPassing" class="h4 fw-bold" style="position:absolute;
+                            max-width: fit-content;
+                            max-height: fit-content;
+                            top:77.5%;
+                            container-type: inline-size;
+                            white-space: nowrap;
+                            right:63.7%;
+                            transform:translate(-50%, -50%);">
+                    @Model.Passing
+                </div>
+
+                <div id="playerPhysical" class="h4 fw-bold" style="position:absolute;
+                            max-width: fit-content;
+                            max-height: fit-content;
+                            top:77.5%;
+                            container-type: inline-size;
+                            white-space: nowrap;
+                            right:39.7%;
+                            transform:translate(-50%, -50%);">
+                    @Model.Physical
+                </div>
+
+                <div id="playerDefending" class="h4 fw-bold" style="position:absolute;
+                            max-width: fit-content;
+                            max-height: fit-content;
+                            top:71.5%;
+                            container-type: inline-size;
+                            white-space: nowrap;
+                            right:39.7%;
+                            transform:translate(-50%, -50%);">
+                    @Model.Defending
+                </div>
+
+                <div id="playerDribbling" class="h4 fw-bold" style="position:absolute;
+                            max-width: fit-content;
+                            max-height: fit-content;
+                            top:65.5%;
+                            container-type: inline-size;
+                            white-space: nowrap;
+                            right:39.7%;
+                            transform:translate(-50%, -50%);">
+                    @Model.Dribbling
+                </div>
+
             </div>
         </div>
 
