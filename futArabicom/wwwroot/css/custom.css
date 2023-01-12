@@ -15,7 +15,7 @@
     width: 100%;
 }
 
-.on-hover {
+.on-hover:hover {
     transform: scale(1.1);
 }
 
