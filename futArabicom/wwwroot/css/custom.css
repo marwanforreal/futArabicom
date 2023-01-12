@@ -23,9 +23,13 @@
     background-color: #042A2B;
 }
 
-.bg-minionYellow-text {
-    color: #F4E04D;
+.bg-richBlack-text {
+    color: #042A2B !important;
 }
+
+    .bg-minionYellow-text {
+        color: #F4E04D !important;
+    }
 
 .bg-minionYellow {
     background-color: #F4E04D;
