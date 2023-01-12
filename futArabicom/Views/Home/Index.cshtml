@@ -27,19 +27,20 @@
                     </svg>
                     تريند اللاعبين
                 </span>
+                <span class="badge bg-info text-dark">بيتا</span>
             </div>
             <div class="row g-0">
                 @foreach (var item in Model)
                 {
                     <div class="col-sm-2">
                         <a class="text-decoration-none" href="@Url.Action("Details", "Players", new {  id=item.Id  })">
-                        <div class="gold-div">
-                            <img id="trendingPlayerCard" src="@ViewBag.imageUrls[count]" alt="image">
-                            <p>@item.Name</p>
-                            @{count++;}
-                        </div>
+                                <div class="card m-0 bg-richBlack">
+                                <img id="trendingPlayerCard" src="~/Images/trendingPlayerCard.png" class="rounded mx-auto d-block position-relative" alt="FutArabi">
+                                <img class="position-absolute" style="width:75%; right:14%; top:11%;" src="@ViewBag.imageUrls[count]" alt="image">
+                                </div>
                         </a>
                     </div>
+                    count++;
                 }
             </div>
         </div>
