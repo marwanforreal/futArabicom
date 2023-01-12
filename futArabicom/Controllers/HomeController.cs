@@ -19,7 +19,15 @@ namespace futArabicom.Controllers
         public IActionResult Index()
         {
             /*Trending players under the search bar list*/
-            var trendingPlayers = _context.Players.Take(12).ToList();
+            var trendingPlayers = _context.Players.OrderByDescending(p => p.Id).Take(12).ToList();
+
+            List<string> playerImagesUrls = new();
+
+            foreach (Player player in trendingPlayers){
+                playerImagesUrls.Add(ExtractImageUrl(player));
+            }
+
+            ViewBag.imageUrls = playerImagesUrls;
 
             return View(trendingPlayers);
         }
@@ -46,6 +54,17 @@ namespace futArabicom.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        private string ExtractImageUrl(Player player)
+        {
+            var image = player.Image;
+            string imageBase64 = Convert.ToBase64String(image);
+
+            var url = string.Format("data:image/png; base64,{0}"
+            , imageBase64);
+
+            return url;
         }
     }
 }

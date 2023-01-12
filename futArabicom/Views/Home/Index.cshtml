@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Home Page";
+    var count = 0;
 }
 
 <div class="text-center">
@@ -31,10 +32,11 @@
                 @foreach (var item in Model)
                 {
                     <div class="col-sm-2">
-                        <!--<p class="display-4">@item.Name</p>-->
-                        <a href="@Url.Action("Details", "Players", new {  id=item.Id  })">
-                            <img id="trendingPlayerCard" src="~/Images/playerCard.png" class="rounded mx-auto d-block img-fluid" alt="FutArabi">
-                        </a>
+                        <div class="gold-div">
+                            <img id="trendingPlayerCard" src="@ViewBag.imageUrls[count]" alt="image">
+                            <p>@item.Name</p>
+                            @{count++;}
+                        </div>
                     </div>
                 }
             </div>
