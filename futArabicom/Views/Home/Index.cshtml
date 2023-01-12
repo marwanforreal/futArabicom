@@ -32,11 +32,13 @@
                 @foreach (var item in Model)
                 {
                     <div class="col-sm-2">
+                        <a class="text-decoration-none" href="@Url.Action("Details", "Players", new {  id=item.Id  })">
                         <div class="gold-div">
                             <img id="trendingPlayerCard" src="@ViewBag.imageUrls[count]" alt="image">
                             <p>@item.Name</p>
                             @{count++;}
                         </div>
+                        </a>
                     </div>
                 }
             </div>
