@@ -107,6 +107,27 @@ namespace futArabicom.Controllers
             return View(player);
         }
 
+        [HttpGet]
+        public IActionResult Delete(int? id)
+        {
+            var player = _context.Players.SingleOrDefault(p => p.Id == id); 
+
+            if(player == null)
+            {
+                return NotFound();
+            }
+
+            return View(player);
+        }
+
+        [HttpDelete]
+        public IActionResult Delete(Player player)
+        {
+            _context.Players.Remove(player);
+            _context.SaveChanges();
+            return View("Index");
+        }
+
         [HttpPost]
         public IActionResult Edit(Player player)
         {
