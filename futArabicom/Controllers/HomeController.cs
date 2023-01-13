@@ -39,14 +39,23 @@ namespace futArabicom.Controllers
 
         public IActionResult Search(string query)
         {
-            var players = _context.Players.ToList(); 
-
-            if(query == null)
+            if (query == null)
             {
                 query = "Marwan";
             }
 
-            return View("Search", players.FindAll(p => p.Name.Contains(query))); 
+            var players = _context.Players.Where(p => p.Name.Contains(query)).ToList();
+
+            List<string> playerImagesUrls = new();
+
+            foreach (Player player in players)
+            {
+                playerImagesUrls.Add(ExtractImageUrl(player));
+            }
+
+            ViewBag.imageUrls = playerImagesUrls;
+
+            return View("Search", players); 
         }
 
 
