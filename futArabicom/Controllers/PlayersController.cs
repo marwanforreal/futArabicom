@@ -19,6 +19,15 @@ namespace futArabicom.Controllers
         {
             var data = _context.Players.ToList();
 
+            List<string> playerImagesUrls = new();
+
+            foreach (Player player in data)
+            {
+                playerImagesUrls.Add(ExtractImageUrl(player));
+            }
+
+            ViewBag.imageUrls = playerImagesUrls;
+
             return View("Index", data);
         }
 
