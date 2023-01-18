@@ -23,6 +23,8 @@ namespace futArabicom.Models
 
         public int? Physical { get; set; }
 
+        public string? Type { get; set; }
+
         public byte[] Image { get; set; }
 
         public Player()
@@ -30,7 +32,7 @@ namespace futArabicom.Models
 
         }
 
-        public Player(int id, string name, string? club, int? pace, int? shooting, int? passing, int? dribbling, int? defending, int? physical, byte[] image)
+        public Player(int id, string name, string? club, int? pace, int? shooting, int? passing, int? dribbling, int? defending, int? physical, string? type, byte[] image)
         {
             Id = id;
             Name = name;
@@ -41,6 +43,7 @@ namespace futArabicom.Models
             Dribbling = dribbling;
             Defending = defending;
             Physical = physical;
+            Type = type;
             Image = image;
         }
     }
