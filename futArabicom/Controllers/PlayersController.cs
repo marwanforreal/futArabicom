@@ -1,5 +1,6 @@
 ﻿using futArabicom.Data;
 using futArabicom.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Buffers.Text;
 using System.Drawing;
@@ -37,6 +38,7 @@ namespace futArabicom.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult Create(Player player, IFormFile playerImage)
         {
