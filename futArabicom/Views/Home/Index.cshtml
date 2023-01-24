@@ -1,15 +1,54 @@
-﻿@{
+﻿@model IEnumerable<futArabicom.Models.Player>
+
+@{
     ViewData["Title"] = "Home Page";
+    var count = 0;
 }
 
 <div class="text-center">
-    <img src="~/Images/Logo.png" class="rounded mx-auto d-block" alt="FutArabi">
+    <img src="~/Images/Logo.png" class="rounded mx-auto d-block img-fluid" alt="FutArabi">
     @using (Html.BeginForm("Search", "Home", FormMethod.Post))
     {
-         <div class="input-group mt-4">
+         <div class="input-group mt-5">
             <input type="search" name="query" class="form-control rounded" placeholder="اسم اللاعب" aria-label="Search" aria-describedby="search-addon" />
             <button type="submit" class="btn btn-outline-primary">البحث</button>
           </div>
     }
-    <p class="mt-4">لست عضواً؟ <a class="text-decoration-none" href="https://docs.microsoft.com/aspnet/core">سجّل الان</a>.</p>
+    <p class="m-4">لست عضواً؟ <a class="text-decoration-none" href="https://docs.microsoft.com/aspnet/core">سجّل الان</a>.</p>
+
+    <div class="alert alert-primary" role="alert">
+        هذا الموقع قيد تطوير. قد تكون بعض المعلومات خاطئة في الوقت الحالي.
+    </div>
+
+    <!-- Trending Players-->
+    @if (Model != null)
+    {
+        <div class="container rounded-3 bg-richBlack pt-3 shadow-lg">
+            <div class="mb-3">
+                <span class="display-4 bg-minionYellow-text">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-graph-up-arrow" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0Zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5Z" />
+                    </svg>
+                    تريند اللاعبين
+                </span>
+                <span class="badge bg-info text-dark">بيتا</span>
+            </div>
+            <div class="row g-0">
+                @foreach (var item in Model)
+                {
+                    <div class="col-sm-2">
+                        <a class="text-decoration-none" href="@Url.Action("Details", "Players", new {  id=item.Id  })">
+                                <div class="card m-0 bg-richBlack on-hover">
+                                <img id="trendingPlayerCard" src="@Url.Content("~/Images/" + item.Type + "Mini.png")" class="rounded mx-auto d-block position-relative" alt="FutArabi">
+                                <img class="position-absolute" style="width:75%; right:14%; top:11%;" src="@ViewBag.imageUrls[count]" alt="image">
+                                </div>
+                        </a>
+                    </div>
+                    count++;
+                }
+            </div>
+        </div>
+    }
+    <!-- End of Trending players-->
+
 </div>

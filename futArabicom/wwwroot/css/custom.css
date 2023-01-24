@@ -1,0 +1,36 @@
+﻿#playerCard {
+    height: 50%;
+    width: 70%;
+}
+
+#playerFace {
+    position: absolute;
+    width: 35%;
+    top: 16%;
+    right: 30%;
+}
+
+#trendingPlayerCard {
+    height: 50%;
+    width: 100%;
+}
+
+.on-hover:hover {
+    transform: scale(1.1);
+}
+
+.bg-richBlack {
+    background-color: #042A2B;
+}
+
+.bg-richBlack-text {
+    color: #042A2B !important;
+}
+
+    .bg-minionYellow-text {
+        color: #F4E04D !important;
+    }
+
+.bg-minionYellow {
+    background-color: #F4E04D;
+}
