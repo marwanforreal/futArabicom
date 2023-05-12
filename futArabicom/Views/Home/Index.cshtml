@@ -14,7 +14,13 @@
             <button type="submit" class="btn btn-outline-primary">البحث</button>
           </div>
     }
-    <p class="m-4">لست عضواً؟ <a class="text-decoration-none" href="https://docs.microsoft.com/aspnet/core">سجّل الان</a>.</p>
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <p class="m-4">لست عضواً؟ <a class="text-decoration-none" href="https://docs.microsoft.com/aspnet/core">سجّل الان</a>.</p>
+    } else
+    {
+        <p class="m-4"> مرحباً بك <span class="text-primary">@User.Identity.Name</span></p>
+    }
 
     <div class="alert alert-primary" role="alert">
         هذا الموقع قيد تطوير. قد تكون بعض المعلومات خاطئة في الوقت الحالي.
