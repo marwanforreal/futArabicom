@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using futArabicom.Areas.Identity.Data;
+using System.ComponentModel.DataAnnotations;
 
 namespace futArabicom.Models
 {
@@ -27,6 +28,8 @@ namespace futArabicom.Models
 
         public byte[] Image { get; set; }
 
+        public List<Comment> Comments { get; set; }
+
         public Player()
         {
 
@@ -45,6 +48,7 @@ namespace futArabicom.Models
             Physical = physical;
             Type = type;
             Image = image;
+            Comments = new List<Comment>() { }; 
         }
     }
 }

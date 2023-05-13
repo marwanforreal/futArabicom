@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using futArabicom.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace futArabicom.Areas.Identity.Data
 {
@@ -9,5 +10,7 @@ namespace futArabicom.Areas.Identity.Data
         public string Content { get; set; }
 
         public User User { get; set; }
+
+        public Player Player { get; set; }
     }
 }
