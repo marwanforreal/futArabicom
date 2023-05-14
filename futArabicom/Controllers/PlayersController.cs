@@ -79,9 +79,12 @@ namespace futArabicom.Controllers
         [HttpGet]
         public IActionResult Details(int id)
         {
+            var currentPlayer = _context.Players.SingleOrDefault(p => p.Id == id);
+
             PlayerDetailsViewModel viewModel = new PlayerDetailsViewModel()
             {
-                Player = _context.Players.SingleOrDefault(p => p.Id == id)
+                Player = currentPlayer,
+                Comments = _context.Comments.Where(p => p.Player == currentPlayer).ToList()
             };
 
             //Player player = _context.Players.SingleOrDefault(p => p.Id == id);
