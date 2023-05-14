@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Buffers.Text;
 using System.Drawing;
 using System.Net.NetworkInformation;
+using futArabicom.Areas.Identity.Data;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace futArabicom.Controllers
 {
@@ -77,16 +79,60 @@ namespace futArabicom.Controllers
         [HttpGet]
         public IActionResult Details(int id)
         {
-            Player player = _context.Players.SingleOrDefault(p => p.Id == id);
-
-            if(player.Image != null)
+            PlayerDetailsViewModel viewModel = new PlayerDetailsViewModel()
             {
-                var imageDataUrl = ExtractImageUrl(player);
+                Player = _context.Players.SingleOrDefault(p => p.Id == id)
+            };
+
+            //Player player = _context.Players.SingleOrDefault(p => p.Id == id);
+
+            if(viewModel.Player.Image != null)
+            {
+                var imageDataUrl = ExtractImageUrl(viewModel.Player);
 
                 ViewBag.imageUrl = imageDataUrl;
             }
 
-            return View("Details", player);
+            return View("Details", viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> addComment(PlayerDetailsViewModel pageModel)
+        {
+            var currentUserName = User.Identity.Name;
+
+            var currentUserObject = _context.Users.FirstOrDefault(x => x.UserName == currentUserName);
+
+            var currentPlayerObject = _context.Players.FirstOrDefault(x => x.Id == pageModel.PlayerId);
+
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState.Select(x => x.Value.Errors).Where(y => y.Count > 0).ToList();
+                return View();
+            }
+
+            try
+            {
+                _context.Comments.Add(new Comment
+                {
+                    Content = pageModel.NewComment.Content,
+                    User = currentUserObject,
+                    Player = currentPlayerObject
+                });
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            await _context.SaveChangesAsync();
+
+            PlayerDetailsViewModel viewModel = new PlayerDetailsViewModel()
+            {
+                Player = _context.Players.SingleOrDefault(p => p.Id == pageModel.PlayerId)
+            };
+
+            return View("Details", viewModel);
         }
 
         private string ExtractImageUrl(Player player)
