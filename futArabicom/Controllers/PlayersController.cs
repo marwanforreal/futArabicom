@@ -131,9 +131,12 @@ namespace futArabicom.Controllers
 
             await _context.SaveChangesAsync();
 
+            var fillComments = _context.Comments.Where(p => p.Player == currentPlayerObject).Include(user => user.User).ToList(); 
+
             PlayerDetailsViewModel viewModel = new PlayerDetailsViewModel()
             {
-                Player = _context.Players.SingleOrDefault(p => p.Id == pageModel.PlayerId)
+                Player = _context.Players.SingleOrDefault(p => p.Id == pageModel.PlayerId),
+                Comments = fillComments
             };
 
             return View("Details", viewModel);
