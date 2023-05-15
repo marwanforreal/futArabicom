@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Net.NetworkInformation;
 using futArabicom.Areas.Identity.Data;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace futArabicom.Controllers
 {
@@ -84,7 +85,7 @@ namespace futArabicom.Controllers
             PlayerDetailsViewModel viewModel = new PlayerDetailsViewModel()
             {
                 Player = currentPlayer,
-                Comments = _context.Comments.Where(p => p.Player == currentPlayer).ToList()
+                Comments = _context.Comments.Where(p => p.Player == currentPlayer).Include(user => user.User).ToList()
             };
 
             //Player player = _context.Players.SingleOrDefault(p => p.Id == id);
