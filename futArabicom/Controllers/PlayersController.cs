@@ -78,9 +78,9 @@ namespace futArabicom.Controllers
         }
 
         [HttpGet]
-        public IActionResult Details(int id)
+        public IActionResult Details(PlayerDetailsViewModel pageModel)
         {
-            var currentPlayer = _context.Players.SingleOrDefault(p => p.Id == id);
+            var currentPlayer = _context.Players.SingleOrDefault(p => p.Id == pageModel.PlayerId);
 
             PlayerDetailsViewModel viewModel = new PlayerDetailsViewModel()
             {
@@ -136,10 +136,11 @@ namespace futArabicom.Controllers
             PlayerDetailsViewModel viewModel = new PlayerDetailsViewModel()
             {
                 Player = _context.Players.SingleOrDefault(p => p.Id == pageModel.PlayerId),
-                Comments = fillComments
+                Comments = fillComments,
+                PlayerId = currentPlayerObject.Id
             };
 
-            return View("Details", viewModel);
+            return RedirectToAction("Details", viewModel);
         }
 
         private string ExtractImageUrl(Player player)

@@ -29,7 +29,7 @@
             @foreach (var item in Model)
             { 
                 <div class="col-sm-2">
-                    <a class="text-decoration-none" href="@Url.Action("Details", "Players", new {  id=item.Id  })">
+                    <a class="text-decoration-none" href="@Url.Action("Details", "Players", new PlayerDetailsViewModel { PlayerId = item.Id })">
                         <div class="card m-0 bg-richBlack on-hover">
                             <img id="trendingPlayerCard" src="@Url.Content("~/Images/" + item.Type + "Mini.png")" class="rounded mx-auto d-block position-relative" alt="FutArabi">
                             <img class="position-absolute" style="width:75%; right:14%; top:11%;" src="@ViewBag.imageUrls[count]" alt="image">
