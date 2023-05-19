@@ -10,6 +10,7 @@ namespace futArabicom.Areas.Identity.Data
     // Add profile data for application users by adding properties to the User class
     public class User : IdentityUser
     {
+        public List<Comment> Comments { get; set; }
     }
 
 }
