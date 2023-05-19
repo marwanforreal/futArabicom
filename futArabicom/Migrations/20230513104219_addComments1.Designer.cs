@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using futArabicom.Data;
 
@@ -10,9 +11,11 @@ using futArabicom.Data;
 namespace futArabicom.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230513104219_addComments1")]
+    partial class addComments1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.5");
@@ -159,15 +162,10 @@ namespace futArabicom.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("PlayerId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("UserId")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PlayerId");
 
                     b.HasIndex("UserId");
 
@@ -334,27 +332,14 @@ namespace futArabicom.Migrations
 
             modelBuilder.Entity("futArabicom.Areas.Identity.Data.Comment", b =>
                 {
-                    b.HasOne("futArabicom.Models.Player", "Player")
-                        .WithMany("Comments")
-                        .HasForeignKey("PlayerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("futArabicom.Areas.Identity.Data.User", "User")
                         .WithMany("Comments")
                         .HasForeignKey("UserId");
-
-                    b.Navigation("Player");
 
                     b.Navigation("User");
                 });
 
             modelBuilder.Entity("futArabicom.Areas.Identity.Data.User", b =>
-                {
-                    b.Navigation("Comments");
-                });
-
-            modelBuilder.Entity("futArabicom.Models.Player", b =>
                 {
                     b.Navigation("Comments");
                 });
