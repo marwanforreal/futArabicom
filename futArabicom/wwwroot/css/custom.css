@@ -4,10 +4,7 @@
 }
 
 #playerFace {
-    position: absolute;
     width: 35%;
-    top: 16%;
-    right: 30%;
 }
 
 #trendingPlayerCard {
@@ -34,3 +31,21 @@
 .bg-minionYellow {
     background-color: #F4E04D;
 }
+
+.circle {
+    width: 150px; /* Adjust the width and height as needed */
+    height: 150px;
+    background-color: #c4efc4;
+    border-radius: 50%; /* Makes the div a perfect circle */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Ensures the image doesn't overflow the circle */
+    margin:auto;
+}
+
+    .circle img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+

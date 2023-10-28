@@ -30,6 +30,8 @@ namespace futArabicom.Models
 
         public List<Comment> Comments { get; set; }
 
+        public List<Claims> Claims { get; set; }
+
         public Player()
         {
 

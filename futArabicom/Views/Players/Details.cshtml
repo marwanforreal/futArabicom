@@ -12,206 +12,48 @@
     </div>
 
     <div class="row">
-        <div class="col-sm-6 m-auto">
+        <div class="col-sm-4 m-auto">
             <div class="p-2 bd-highlight">
-                <div class="card">
-                <img id="playerCard" src="@Url.Content("~/Images/" + Model.Player.Type + ".png")" class="rounded mx-auto d-block" alt="FutArabi">
-                <img id="playerFace" class="align-items-center" src="@ViewBag.imageUrl" />
-
-                <!--I really hate this part, player name and stats and it needs to be fixed.-->
-                <div id="playerNameOnCard" class="h3" style="position:absolute;
-                            max-width: fit-content;
-                            max-height: fit-content;
-                            top:57%;
-                            container-type: inline-size;
-                            white-space: nowrap;
-                            right:38%;
-                            transform:translate(-50%, -50%);">@Model.Player.Name</div>
-
-                <div id="playerPace" class="h4 fw-bold" style="position:absolute;
-                            max-width: fit-content;
-                            max-height: fit-content;
-                            top:65.5%;
-                            container-type: inline-size;
-                            white-space: nowrap;
-                            right:64%;
-                            transform:translate(-50%, -50%);">
-                        @Model.Player.Pace
-                </div>
-
-                <div id="playerShooting" class="h4 fw-bold" style="position:absolute;
-                            max-width: fit-content;
-                            max-height: fit-content;
-                            top:71.5%;
-                            container-type: inline-size;
-                            white-space: nowrap;
-                            right:63.7%;
-                            transform:translate(-50%, -50%);">
-                    @Model.Player.Shooting
-                </div>
-
-                <div id="playerPassing" class="h4 fw-bold" style="position:absolute;
-                            max-width: fit-content;
-                            max-height: fit-content;
-                            top:77.5%;
-                            container-type: inline-size;
-                            white-space: nowrap;
-                            right:63.7%;
-                            transform:translate(-50%, -50%);">
-                    @Model.Player.Passing
-                </div>
-
-                <div id="playerPhysical" class="h4 fw-bold" style="position:absolute;
-                            max-width: fit-content;
-                            max-height: fit-content;
-                            top:77.5%;
-                            container-type: inline-size;
-                            white-space: nowrap;
-                            right:39.7%;
-                            transform:translate(-50%, -50%);">
-                    @Model.Player.Physical
-                </div>
-
-                <div id="playerDefending" class="h4 fw-bold" style="position:absolute;
-                            max-width: fit-content;
-                            max-height: fit-content;
-                            top:71.5%;
-                            container-type: inline-size;
-                            white-space: nowrap;
-                            right:39.7%;
-                            transform:translate(-50%, -50%);">
-                    @Model.Player.Defending
-                </div>
-
-                <div id="playerDribbling" class="h4 fw-bold" style="position:absolute;
-                            max-width: fit-content;
-                            max-height: fit-content;
-                            top:65.5%;
-                            container-type: inline-size;
-                            white-space: nowrap;
-                            right:39.7%;
-                            transform:translate(-50%, -50%);">
-                        @Model.Player.Dribbling
-                </div>
-
-            </div>
+                    <div class="card p-3">
+                        <div class="circle">
+                            <img src="@ViewBag.imageUrl" />
+                        </div>
+                        <div class="card-body">
+                        <h5 class="card-title">فلان بن علّان</h5>
+                            <p class="card-text">لاعب كرة قدم مصري</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">الجنسية</li>
+                            <li class="list-group-item">العمل</li>
+                            <li class="list-group-item">التصويت</li>
+                        </ul>
+                        <div class="card-body">
+                            <a href="#" class="card-link">Card link</a>
+                            <a href="#" class="card-link">Another link</a>
+                        </div>
+                    </div>
             </div>
         </div>
 
-        <div class="col-sm-6 m-auto p-5">
-            <span>السرعة</span>
-                <div class="p-2 bd-highlight w-75">
-                    <div class="progress">
-                    <div class="progress-bar progress-bar-striped" role="progressbar" style="width: @Model.Player.Pace%" aria-valuenow="@Model.Player.Pace" aria-valuemin="0" aria-valuemax="100">@Model.Player.Pace</div>
-                    </div>
-                </div><hr />
-
-            <span>المراوغة</span>
-                <div class="p-2 bd-highlight w-75">
-                    <div class="progress">
-                    <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: @Model.Player.Dribbling%" aria-valuenow="@Model.Player.Dribbling" aria-valuemin="0" aria-valuemax="100">@Model.Player.Dribbling</div>
-                    </div>
-                </div><hr />
-
-            <span>التسديد</span>
-                <div class="p-2 bd-highlight w-75">
-                    <div class="progress">
-                    <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: @Model.Player.Shooting%" aria-valuenow="@Model.Player.Shooting" aria-valuemin="0" aria-valuemax="100">@Model.Player.Shooting</div>
-                    </div>
-                </div><hr />
-
-            <span>الدفاع</span>
-                <div class="p-2 bd-highlight w-75">
-                    <div class="progress">
-                    <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: @Model.Player.Defending%" aria-valuenow="@Model.Player.Defending" aria-valuemin="0" aria-valuemax="100">@Model.Player.Defending</div>
-                    </div>
-                </div><hr />
-
-            <span>القوة الجسدية</span>
-                <div class="p-2 bd-highlight w-75">
-                    <div class="progress">
-                    <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: @Model.Player.Physical%" aria-valuenow="@Model.Player.Physical" aria-valuemin="0" aria-valuemax="100">@Model.Player.Physical</div>
-                    </div>
-                </div><hr />
-
-            <span>التمرير</span>
-                <div class="p-2 bd-highlight w-75">
-                    <div class="progress">
-                    <div class="progress-bar progress-bar-striped" role="progressbar" style="width: @Model.Player.Passing%" aria-valuenow="@Model.Player.Passing" aria-valuemin="0" aria-valuemax="100">@Model.Player.Passing</div>
-                    </div>
-                </div>
-            <hr />
-            <div class="text-center position-relative">
-                <div>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-coin" viewBox="0 0 16 16">
-                        <path d="M5.5 9.511c.076.954.83 1.697 2.182 1.785V12h.6v-.709c1.4-.098 2.218-.846 2.218-1.932 0-.987-.626-1.496-1.745-1.76l-.473-.112V5.57c.6.068.982.396 1.074.85h1.052c-.076-.919-.864-1.638-2.126-1.716V4h-.6v.719c-1.195.117-2.01.836-2.01 1.853 0 .9.606 1.472 1.613 1.707l.397.098v2.034c-.615-.093-1.022-.43-1.114-.9H5.5zm2.177-2.166c-.59-.137-.91-.416-.91-.836 0-.47.345-.822.915-.925v1.76h-.005zm.692 1.193c.717.166 1.048.435 1.048.91 0 .542-.412.914-1.135.982V8.518l.087.02z" />
-                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                        <path d="M8 13.5a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11zm0 .5A6 6 0 1 0 8 2a6 6 0 0 0 0 12z" />
+        <div class="col-sm-8 m-auto">
+            @foreach (var comment in Model.Comments)
+            {
+            <div class="alert alert-danger" role="alert">
+                بتاريخ 25-5 قام هذا الشخص بعمل هذه الاشياء, وقد تم التحقق منها عن طريق
+                                بتاريخ 25-5 قام هذا الشخص بعمل هذه الاشياء, وقد تم التحقق منها عن طريr
+                بتاريخ 25-5 قام هذا الشخص بعمل هذه الاشياء, وقد تم التحقق منها عن طريق
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#1c943e" class="bi bi-shield-fill-check" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M8 0c-.69 0-1.843.265-2.928.56-1.11.3-2.229.655-2.887.87a1.54 1.54 0 0 0-1.044 1.262c-.596 4.477.787 7.795 2.465 9.99a11.777 11.777 0 0 0 2.517 2.453c.386.273.744.482 1.048.625.28.132.581.24.829.24s.548-.108.829-.24a7.159 7.159 0 0 0 1.048-.625 11.775 11.775 0 0 0 2.517-2.453c1.678-2.195 3.061-5.513 2.465-9.99a1.541 1.541 0 0 0-1.044-1.263 62.467 62.467 0 0 0-2.887-.87C9.843.266 8.69 0 8 0zm2.146 5.146a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793l2.646-2.647z"/>
+                </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z" />
+                        <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z" />
                     </svg>
-                    <p class="h5 d-inline">&nbsp;اقل سعر حالياً:</p>
-                    <p class="h5 d-inline">31,500</p>
-                </div>
-           </div>
+            </div>
+            }
         </div>
     </div>
 </div>
-
-<!--<h1>Details</h1>
-
-<div>
-    <h4>Player</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-@Html.DisplayNameFor(model => model.Player.Name)
-        </dt>
-        <dd class = "col-sm-10">
-@Html.DisplayFor(model => model.Player.Name)
-        </dd>
-        <dt class = "col-sm-2">
-@Html.DisplayNameFor(model => model.Player.Club)
-        </dt>
-        <dd class = "col-sm-10">
-@Html.DisplayFor(model => model.Player.Club)
-        </dd>
-        <dt class="col-sm-2">
-@Html.DisplayNameFor(model => model.Player.Pace)
-        </dt>
-        <dd class="col-sm-10">
-@Html.DisplayFor(model => model.Player.Pace)
-        </dd>
-        <dt class="col-sm-2">
-@Html.DisplayNameFor(model => model.Player.Shooting)
-        </dt>
-        <dd class="col-sm-10">
-@Html.DisplayFor(model => model.Player.Shooting)
-        </dd>
-        <dt class="col-sm-2">
-@Html.DisplayNameFor(model => model.Player.Dribbling)
-        </dt>
-        <dd class="col-sm-10">
-@Html.DisplayFor(model => model.Player.Dribbling)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Player.Defending)
-        </dt>
-        <dd class="col-sm-10">
-@Html.DisplayFor(model => model.Player.Defending)
-        </dd>
-        <dt class="col-sm-2">
-@Html.DisplayNameFor(model => model.Player.Physical)
-        </dt>
-        <dd class="col-sm-10">
-@Html.DisplayFor(model => model.Player.Physical)
-        </dd>
-        <dt class="col-sm-2">
-@Html.DisplayNameFor(model => model.Player.Passing)
-        </dt>
-        <dd class="col-sm-10">
-@Html.DisplayFor(model => model.Player.Passing)
-        </dd>
-    </dl>
-</div> --> 
 
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Player.Id" class="btn btn-primary" role="button">
