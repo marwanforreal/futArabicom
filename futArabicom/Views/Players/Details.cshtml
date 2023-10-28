@@ -28,9 +28,13 @@
                             <li class="list-group-item">التصويت</li>
                         </ul>
                         <div class="card-body">
-                            <a href="#" class="card-link">Card link</a>
-                            <a href="#" class="card-link">Another link</a>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 67%" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
                         </div>
+                    <div class="voting-circle">
+                        56%
+                    </div>
                     </div>
             </div>
         </div>
@@ -51,6 +55,9 @@
                     </svg>
             </div>
             }
+
+            <a href="@Url.Action("Create", "Claims", new { recordId = Model.PlayerId })" class="btn btn-danger float-end">إضافة حدث</a>
+
         </div>
     </div>
 </div>

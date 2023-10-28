@@ -13,6 +13,12 @@ namespace futArabicom.Areas.Identity.Data
 
         public Player? Player { get; set; }
 
+        public string? Source { get; set; }
+
+        public DateTime claimDate { get; set; }
+
+        public DateTime timeStamp { get; set; }
+
         public bool isVerified { get; set; }
     }
 }

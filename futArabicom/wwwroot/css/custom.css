@@ -49,3 +49,16 @@
         max-height: 100%;
     }
 
+.voting-circle {
+    width: 50px; /* Adjust the width and height as needed */
+    height: 50px;
+    border: 1px solid #05530e;
+    background-color: #FFFFFF;
+    border-radius: 50%; /* Makes the div a perfect circle */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Ensures the image doesn't overflow the circle */
+    margin: auto;
+}
+
