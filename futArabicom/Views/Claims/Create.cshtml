@@ -16,13 +16,25 @@
 <h4></h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-8">
         <form method="post" asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
                 <label asp-for="Content" class="control-label"> وصف الحدث </label>
                 <input asp-for="Content" class="form-control" />
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Source" class="control-label"> المصدر </label>
+                <input asp-for="Source" class="form-control" />
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="claimDate" class="control-label"> تاريخ الحدث </label>
+                <input asp-for="claimDate" class="form-control" />
                 <span asp-validation-for="Content" class="text-danger"></span>
             </div>
 
