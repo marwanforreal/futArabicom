@@ -27,7 +27,7 @@ namespace futArabicom.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Claims claim)
+        public async Task<IActionResult> Create(Claims claim)
         {
             var playerIdString = TempData["playerId"].ToString();
 
@@ -45,7 +45,18 @@ namespace futArabicom.Controllers
 
             claim.User = getUserByUsername(User.Identity.Name);
 
-            return RedirectToAction("Details", "Players", new { id = claim.Player.Id });
+            try
+            {
+                _context.Claims.Add(claim);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+             
+
+            return RedirectToAction("Details", "Players", new PlayerDetailsViewModel { PlayerId = claim.Player.Id});
         }
 
         private Player getPlayerById(int playerId)

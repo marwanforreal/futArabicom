@@ -25,7 +25,7 @@
 }
 
     .bg-minionYellow-text {
-        color: #F4E04D !important;
+        color: #FFFFFF !important;
     }
 
 .bg-minionYellow {
@@ -61,4 +61,21 @@
     overflow: hidden; /* Ensures the image doesn't overflow the circle */
     margin: auto;
 }
+
+.trending-cards {
+    width: 150px; /* Adjust the width and height as needed */
+    height: 150px;
+    background-color: #eeef;
+    display: flex;
+    border-radius: 25%;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Ensures the image doesn't overflow the circle */
+    margin: auto;
+}
+
+    .trending-cards img {
+        max-width: 100%;
+        max-height: 100%;
+    }
 

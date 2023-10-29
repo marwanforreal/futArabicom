@@ -85,7 +85,8 @@ namespace futArabicom.Controllers
             PlayerDetailsViewModel viewModel = new PlayerDetailsViewModel()
             {
                 Player = currentPlayer,
-                Comments = _context.Comments.Where(p => p.Player == currentPlayer).Include(user => user.User).ToList()
+                Comments = _context.Comments.Where(p => p.Player == currentPlayer).Include(user => user.User).ToList(),
+                Claims = _context.Claims.Where(p => p.Player == currentPlayer).Include(user => user.User).ToList()
             };
 
             //Player player = _context.Players.SingleOrDefault(p => p.Id == id);
@@ -99,6 +100,7 @@ namespace futArabicom.Controllers
 
             return View("Details", viewModel);
         }
+
 
         [HttpPost]
         public async Task<IActionResult> addComment(PlayerDetailsViewModel pageModel)
