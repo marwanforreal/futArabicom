@@ -14,6 +14,7 @@
 
     <script type="text/javascript">
         $(function () {
+            var pageId;
             $("#txtSearch").autocomplete({
                 source: function (request, response) {
                     $.ajax({
@@ -22,7 +23,8 @@
                         type: "GET",
                         success: function (data) {
                             response($.map(data, function (item) {
-                                return item;
+                                pageId = item.id;
+                                return item.name;
                             }))
                         },
                         error: function (response) {
@@ -34,8 +36,15 @@
                     });
                 },
                 select: function (e, i) {
-                    $("#hfCustomer").val(i.item.val);
-                    //I don't know what this part does. 
+                    //$("#hfCustomer").val(i.item.val);
+                    //I don't know what this part does.
+
+                    window.location.href = '/Players/Details?PlayerId=' + pageId;
+                    console.log(e);
+                    console.log(i);
+                    console.log(pageId);
+                    // Prevent the default behavior of selecting an item (which would populate the input field).
+                    e.preventDefault();
                 },
                 minLength: 1
             });

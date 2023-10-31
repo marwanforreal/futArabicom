@@ -40,16 +40,19 @@ namespace futArabicom.Controllers
         [HttpGet]
         public JsonResult AutoComplete(string prefix)
         {
-            var pages = _context.Players.Where(p => p.Name.ToLower().StartsWith(prefix.ToLower())).Select(p => p.Name).ToList();
+            // var pages = _context.Players.Where(p => p.Name.ToLower().StartsWith(prefix.ToLower())).Select(p => p.Name).ToList();
 
-           return Json(pages);
-        }
+            //return Json(pages);
+            var players = _context.Players
+                    .Where(p => p.Name.ToLower().StartsWith(prefix.ToLower()))
+                     .Select(p => new
+                        {
+                            Id = p.Id,
+                            Name = p.Name
+                        })
+                    .ToList();
 
-        [HttpPost]
-        public ActionResult Index(string pageName)
-        {
-            ViewBag.Message = pageName;
-            return View();
+            return Json(players);
         }
 
         public IActionResult Search(string query)
