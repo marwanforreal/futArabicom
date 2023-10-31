@@ -37,6 +37,21 @@ namespace futArabicom.Controllers
             return View();
         }
 
+        [HttpGet]
+        public JsonResult AutoComplete(string prefix)
+        {
+            var pages = _context.Players.Where(p => p.Name.ToLower().StartsWith(prefix.ToLower())).Select(p => p.Name).ToList();
+
+           return Json(pages);
+        }
+
+        [HttpPost]
+        public ActionResult Index(string pageName)
+        {
+            ViewBag.Message = pageName;
+            return View();
+        }
+
         public IActionResult Search(string query)
         {
             if (query == null)
