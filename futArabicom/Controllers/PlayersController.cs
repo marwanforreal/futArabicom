@@ -211,6 +211,12 @@ namespace futArabicom.Controllers
         [HttpPost]
         public IActionResult Edit(Player player)
         {
+            var oldRecord = _context.Players.Where(p => p.Id == player.Id).Include(p => p.Claims).Include(x => x.Claims).FirstOrDefault(p => p.Id == player.Id);
+
+            player.Image = oldRecord.Image;
+            player.Claims = oldRecord.Claims;
+            player.Comments = oldRecord.Comments; 
+
             if(player.Image == null)
             {
                 player.Image = new byte[0];  

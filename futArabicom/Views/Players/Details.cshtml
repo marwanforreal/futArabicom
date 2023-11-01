@@ -6,6 +6,10 @@
     var count = 0;
 }
 
+@section scripts{
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+}
+
 
 <div class="d-flex flex-column bd-highlight mb-3 align-items-center bg-light rounded-3">
     <div class="container-fluid">
@@ -53,12 +57,13 @@
             </div>
 
             <div class="col-sm-8 m-auto">
+                <div class="alert-table">
                 @if(Model.Player.Claims != null && Model.Player.Claims.Count > 0){
-                    @foreach (var claim in Model.Claims)
-                    {
                         <div class="d-flex justify-content-center align-items-center mb-1">
                             <p class="m-0 bg-danger display-5 text-light">المقاطعة واجبة</p>
                         </div>
+                    @foreach (var claim in Model.Claims)
+                    {
                     <div class="alert alert-danger" role="alert">
                         @claim.Content
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#1c943e" class="bi bi-shield-fill-check" viewBox="0 0 16 16">
@@ -78,8 +83,14 @@
                         لا يوجد ملاحظات حالياً 
                     </div>
                 }
+                </div>
 
-                <a href="@Url.Action("Create", "Claims", new { playerId = Model.Player.Id })" class="btn btn-danger float-end">إضافة حدث</a>
+                <div class="d-flex justify-content-center">
+                    <a class="twitter-share-button float-end"
+                       href="https://twitter.com/intent/tweet?text=لنقاطع شركة @Model.Player.NameAr من اجل قضيتنا العربية المركزية في فلسطين, لمزيد من المعلومات عن اسباب المقاطعة: #FreePalestine">
+                        Tweet
+                    </a>
+                </div>
 
             </div>
         </div>
@@ -135,5 +146,7 @@
         </svg>
         قائمة اللاعبين
     </a>
+
+    <a href="@Url.Action("Create", "Claims", new { playerId = Model.Player.Id })" class="btn btn-danger float-end">إضافة حدث</a>
 
 </div>

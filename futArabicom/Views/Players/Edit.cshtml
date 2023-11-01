@@ -4,59 +4,40 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>Player</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Club" class="control-label"></label>
-                <input asp-for="Club" class="form-control" />
-                <span asp-validation-for="Club" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Pace" class="control-label"></label>
-                <input asp-for="Pace" class="form-control" />
-                <span asp-validation-for="Pace" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Shooting" class="control-label"></label>
-                <input asp-for="Shooting" class="form-control" />
-                <span asp-validation-for="Shooting" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Passing" class="control-label"></label>
-                <input asp-for="Passing" class="form-control" />
-                <span asp-validation-for="Passing" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Dribbling" class="control-label"></label>
-                <input asp-for="Dribbling" class="form-control" />
-                <span asp-validation-for="Dribbling" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Defending" class="control-label"></label>
-                <input asp-for="Defending" class="form-control" />
-                <span asp-validation-for="Defending" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Physical" class="control-label"></label>
-                <input asp-for="Physical" class="form-control" />
-                <span asp-validation-for="Physical" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="container">
+    <div class="row justify-content-center">
+        <p class="display-6"> تعديل </p>
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"> الإسم</label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NameAr" class="control-label">الإسم بالعربيّة</label>
+                    <input asp-for="NameAr" class="form-control" />
+                    <span asp-validation-for="NameAr" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Country" class="control-label">الدولة</label>
+                    <input asp-for="Country" class="form-control" />
+                    <span asp-validation-for="Country" class="text-danger"></span>
+                </div>
+                            <div class="form-group">
+                    <label asp-for="Description" class="control-label">الوصف</label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+           
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 

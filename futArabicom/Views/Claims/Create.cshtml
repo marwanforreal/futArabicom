@@ -39,7 +39,7 @@
             </div>
 
             <div class="form-group">
-                <input type="submit" value="إضافة" class="btn btn-danger" />
+                <input type="submit" id="submitButton" value="إضافة" class="btn btn-danger" />
             </div>
         </form>
     </div>
@@ -53,4 +53,19 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Get the URL from the anchor link
+            var url = "@Url.Action("Details", "Players", new PlayerDetailsViewModel { PlayerId = 0 })";
+
+            // Add a click event handler to the button
+            $('#submitButton').click(function () {
+                // Navigate to the URL when the button is clicked
+                window.location.href = url;
+            });
+        });
+    </script>
 }

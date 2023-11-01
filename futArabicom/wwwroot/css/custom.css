@@ -80,6 +80,14 @@
         max-height: 100%;
     }
 
+.alert-table {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: solid 1px #dbd8d8;
+    padding: 5px;
+    border-radius: 15px;
+}
+
 
 @media (max-width: 768px) {
     .trending-cards {
