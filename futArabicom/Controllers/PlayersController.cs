@@ -98,6 +98,19 @@ namespace futArabicom.Controllers
                 ViewBag.imageUrl = imageDataUrl;
             }
 
+            var similarPlayers = _context.Players.OrderByDescending(p => p.Id).Take(6).ToList();
+
+            viewModel.SimilarPlayers = similarPlayers;
+
+            List<string> similarPlayerImagesUrls = new();
+
+            foreach (Player player in similarPlayers)
+            {
+                similarPlayerImagesUrls.Add(ExtractImageUrl(player));
+            }
+
+            ViewBag.imageUrls = similarPlayerImagesUrls;
+
             return View("Details", viewModel);
         }
 

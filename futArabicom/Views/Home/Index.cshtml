@@ -76,7 +76,7 @@
     <!-- Trending Players-->
     @if (Model != null)
     {
-        <div class="container rounded-3 bg-richBlack pt-3 shadow-lg">
+        <div class="container rounded-3 bg-richBlack pt-3 pb-3 shadow-lg">
             <div class="mb-3">
                 <span class="display-4 bg-minionYellow-text">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-graph-up-arrow" viewBox="0 0 16 16">
@@ -89,7 +89,7 @@
             <div class="row g-0">
                 @foreach (var item in Model)
                 {
-                    <div class="col-sm-2">
+                    <div class="col-6 col-md-2">
                         <a class="text-decoration-none" href="@Url.Action("Details", "Players", new PlayerDetailsViewModel { PlayerId = item.Id })">
                                 <div class="card m-0 bg-richBlack on-hover">
                                 @*<img id="trendingPlayerCard" src="@Url.Content("~/Images/" + item.Type + "Mini.png")" class="rounded mx-auto d-block position-relative" alt="FutArabi">*@

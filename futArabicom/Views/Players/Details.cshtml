@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Details";
     var playerId = Model.Player.Id;
+    var count = 0;
 }
 
 
@@ -100,6 +101,39 @@
             </svg>
         قائمة اللاعبين
     </a>
+
+    <!-- Trending Players-->
+    @if (Model.SimilarPlayers != null)
+    {
+        <div class="container rounded-3 bg-richBlack pt-3 pb-3 shadow-lg mt-2">
+            <div class="mb-3 text-center">
+                <span class="display-4 bg-minionYellow-text">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-graph-up-arrow" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0Zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5Z" />
+                    </svg>
+                    صفحات مشابهة
+                </span>
+                <span class="badge bg-info text-dark">بيتا</span>
+            </div>
+            <div class="row g-0">
+                @foreach (var item in Model.SimilarPlayers)
+                {
+                    <div class="col-6 col-md-2">
+                        <a class="text-decoration-none" href="@Url.Action("Details", "Players", new PlayerDetailsViewModel { PlayerId = item.Id })">
+                            <div class="card m-0 bg-richBlack on-hover">
+                                @*<img id="trendingPlayerCard" src="@Url.Content("~/Images/" + item.Type + "Mini.png")" class="rounded mx-auto d-block position-relative" alt="FutArabi">*@
+                                <div class="trending-cards">
+                                    <img style="width:75%; right:14%; top:11%;" src="@ViewBag.imageUrls[count]" alt="image">
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    count++;
+                }
+            </div>
+        </div>
+    }
+    <!-- End of Trending players-->
 
     <section style="background-color: #eee;">
         <form method="POST" asp-action="addComment" asp-controller="Players">

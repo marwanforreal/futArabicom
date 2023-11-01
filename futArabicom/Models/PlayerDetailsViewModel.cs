@@ -13,5 +13,7 @@ namespace futArabicom.Models
         public Comment? NewComment { get; set; }
 
         public int? PlayerId { get; set; }
+
+        public List<Player> SimilarPlayers { get; set; }
     }
 }

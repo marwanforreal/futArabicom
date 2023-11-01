@@ -80,3 +80,11 @@
         max-height: 100%;
     }
 
+
+@media (max-width: 768px) {
+    .trending-cards {
+        height: 115px; /* Override the background color for mobile screens */
+        width: 115px; /* Override the text color for mobile screens */
+        margin-bottom: 10px;
+    }
+}
