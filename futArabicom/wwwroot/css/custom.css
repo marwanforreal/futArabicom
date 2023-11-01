@@ -35,13 +35,14 @@
 .circle {
     width: 150px; /* Adjust the width and height as needed */
     height: 150px;
-    background-color: #c4efc4;
-    border-radius: 50%; /* Makes the div a perfect circle */
+    background-color: #ededed;
+    border: solid 1px #c7c5c5;
+    border-radius: 15%; /* Makes the div a perfect circle */
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden; /* Ensures the image doesn't overflow the circle */
-    margin:auto;
+    margin: auto;
 }
 
     .circle img {

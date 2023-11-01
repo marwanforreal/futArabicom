@@ -10,6 +10,12 @@ namespace futArabicom.Models
         [Required]
         public string Name { get; set; }
 
+        public string NameAr { get; set; }
+
+        public string Description { get; set; }
+
+        public string Country { get; set; } 
+
         public string? Club { get; set; }
 
         public int? Pace { get; set; }

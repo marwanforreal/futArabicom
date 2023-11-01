@@ -4,28 +4,37 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>Player</h4>
 <hr />
-<div class="row">
+<div class="container">
+<div class="row justify-content-center">
     <div class="col-md-4">
+        <p class="display-5">إضافة صفحة</p>
         <form method="post" asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
+                <label asp-for="Name" class="control-label">الإسم</label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Club" class="control-label"></label>
-                <input asp-for="Club" class="form-control" />
-                <span asp-validation-for="Club" class="text-danger"></span>
+                <label asp-for="NameAr" class="control-label">الإسم بالعربيّة</label>
+                <input asp-for="NameAr" class="form-control" />
+                <span asp-validation-for="NameAr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label">الوصف</label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Type" class="control-label"></label>
                 <input asp-for="Type" class="form-control" />
                 <span asp-validation-for="Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Country" class="control-label">الدولة</label>
+                <input asp-for="Country" class="form-control" />
+                <span asp-validation-for="Country" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Image"></label>
@@ -34,11 +43,12 @@
                        asp-for="Image"
                        class="form-control"/>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="form-group mt-1">
+                <input type="submit" value="أضافة" class="btn btn-primary" />
             </div>
         </form>
     </div>
+</div>
 </div>
 
 <div>

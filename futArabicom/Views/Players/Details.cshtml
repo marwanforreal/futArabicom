@@ -16,23 +16,38 @@
                                 <img src="@ViewBag.imageUrl" />
                             </div>
                             <div class="card-body">
-                            <h5 class="card-title">فلان بن علّان</h5>
-                                <p class="card-text">لاعب كرة قدم مصري</p>
+                            <h5 class="card-title">@Model.Player.NameAr</h5>
+                                <p class="card-text">@Model.Player.Description</p>
                             </div>
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item">الجنسية</li>
-                                <li class="list-group-item">العمل</li>
-                                <li class="list-group-item">التصويت</li>
+                            <li class="list-group-item">الجنسية:<b> @Model.Player.Country </b></li>
+                                <li class="list-group-item">الإسم العالمي: <b> @Model.Player.Name </b> </li>
+                                <li class="list-group-item">آخر تحديث: 1/11/2023 18:55</li>
                             </ul>
                             <div class="card-body">
                                 <div class="progress">
-                                    <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 67%" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
-                        <div class="voting-circle">
-                            56%
-                        </div>
-                        </div>
+                        @if (Model.Player.Claims != null && Model.Player.Claims.Count > 0)
+                        {
+                            <div class="container">
+                            <div class="row justify-content-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="#c92c20" class="bi bi-ban" viewBox="0 0 16 16">
+                                    <path d="M15 8a6.973 6.973 0 0 0-1.71-4.584l-9.874 9.875A7 7 0 0 0 15 8ZM2.71 12.584l9.874-9.875a7 7 0 0 0-9.874 9.874ZM16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0Z" />
+                                </svg>
+                            </div>
+                            </div>
+                        }
+                        @if (Model.Player.Claims == null || Model.Player.Claims.Count == 0)
+                        {
+                            <div class="voting-circle">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#05530e" class="bi bi-binoculars-fill" viewBox="0 0 16 16">
+                                    <path d="M4.5 1A1.5 1.5 0 0 0 3 2.5V3h4v-.5A1.5 1.5 0 0 0 5.5 1h-1zM7 4v1h2V4h4v.882a.5.5 0 0 0 .276.447l.895.447A1.5 1.5 0 0 1 15 7.118V13H9v-1.5a.5.5 0 0 1 .146-.354l.854-.853V9.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v.793l.854.853A.5.5 0 0 1 7 11.5V13H1V7.118a1.5 1.5 0 0 1 .83-1.342l.894-.447A.5.5 0 0 0 3 4.882V4h4zM1 14v.5A1.5 1.5 0 0 0 2.5 16h3A1.5 1.5 0 0 0 7 14.5V14H1zm8 0v.5a1.5 1.5 0 0 0 1.5 1.5h3a1.5 1.5 0 0 0 1.5-1.5V14H9zm4-11H9v-.5A1.5 1.5 0 0 1 10.5 1h1A1.5 1.5 0 0 1 13 2.5V3z" />
+                                </svg>
+                            </div>
+                        }
+                    </div>
                 </div>
             </div>
 
@@ -41,11 +56,6 @@
                     @foreach (var claim in Model.Claims)
                     {
                         <div class="d-flex justify-content-center align-items-center mb-1">
-                            <div class="me-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#c92c20" class="bi bi-ban" viewBox="0 0 16 16">
-                                <path d="M15 8a6.973 6.973 0 0 0-1.71-4.584l-9.874 9.875A7 7 0 0 0 15 8ZM2.71 12.584l9.874-9.875a7 7 0 0 0-9.874 9.874ZM16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0Z" />
-                            </svg>
-                            </div>
                             <p class="m-0 bg-danger display-5 text-light">المقاطعة واجبة</p>
                         </div>
                     <div class="alert alert-danger" role="alert">
