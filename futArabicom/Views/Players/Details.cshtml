@@ -87,25 +87,11 @@
 </div>
 
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Player.Id" class="btn btn-primary" role="button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-            </svg>
-        تعديل اللاعب
-    </a> 
-
-    <a asp-action="Index" class="btn btn-primary" role="button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
-                <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z" />
-            </svg>
-        قائمة اللاعبين
-    </a>
 
     <!-- Trending Players-->
     @if (Model.SimilarPlayers != null)
     {
-        <div class="container rounded-3 bg-richBlack pt-3 pb-3 shadow-lg mt-2">
+        <div class="container rounded-3 bg-richBlack pt-3 pb-3 shadow-lg mt-2 mb-2">
             <div class="mb-3 text-center">
                 <span class="display-4 bg-minionYellow-text">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-graph-up-arrow" viewBox="0 0 16 16">
@@ -135,75 +121,19 @@
     }
     <!-- End of Trending players-->
 
-    <section style="background-color: #eee;">
-        <form method="POST" asp-action="addComment" asp-controller="Players">
-            <div class="container my-5 py-5">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-md-12 col-lg-10 col-xl-8">
-                        <div class="card">
+    <a asp-action="Edit" asp-route-id="@Model?.Player.Id" class="btn btn-primary" role="button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+        </svg>
+        تعديل اللاعب
+    </a>
 
-                            @foreach (var comment in Model.Comments)
-                            {
-                                <div class="card-body">
-                                    <div class="d-flex flex-start align-items-center">
-                                        <div class="rounded-circle bg-primary text-white d-flex justify-content-center align-items-center"
-                                             style="width: 60px; height: 60px; font-size: 24px;margin: 10px;">
-                                            @comment.User.UserName[0] <!-- Display the first character of the user's username -->
-                                        </div>
-                                        <div>
-                                            <h6 class="fw-bold text-primary mb-1">@comment.User.UserName</h6>
-                                            <p class="text-muted small mb-0">
-                                                Shared publicly - Jan 2020
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <p class="mt-3 mb-4 pb-2">
-                                        @comment.Content
-                                    </p>
-
-                                    <div class="small d-flex justify-content-start">
-                                        <a href="#!" class="d-flex align-items-center me-3 text-decoration-none">
-                                            <i class="far fa-thumbs-up me-2"></i>
-                                            <p class="mb-0">Like</p>
-                                        </a>
-                                        <a href="#!" class="d-flex align-items-center me-3 text-decoration-none">
-                                            <i class="far fa-comment-dots me-2"></i>
-                                            <p class="mb-0">Comment</p>
-                                        </a>
-                                        <a href="#!" class="d-flex align-items-center me-3 text-decoration-none">
-                                            <i class="fas fa-share me-2"></i>
-                                            <p class="mb-0">Share</p>
-                                        </a>
-                                    </div>
-                                </div>
-                            }
-
-                            <div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
-                                <div class="d-flex flex-start w-100">
-                                    <div class="rounded-circle bg-primary text-white d-flex justify-content-center align-items-center"
-                                         style="width: 40px; height: 40px; font-size: 18px;margin: 10px;">
-                                        <!-- You can use a placeholder or an icon here -->
-                                        U <!-- Example placeholder -->
-                                    </div>
-                                    <div class="form-outline w-100">
-                                        <textarea asp-for="NewComment.Content" class="form-control" id="textAreaExample"
-                                                  rows="4" style="background: #fff;"></textarea>
-
-                                        <label class="form-label" for="textAreaExample">Message</label>
-                                    </div>
-                                </div>
-                                <div class="float-end mt-2 pt-1">
-                                    <input type="hidden" id="playerId" name="playerId" asp-for="PlayerId"
-                                           value="@playerId" />
-                                    <button type="submit" class="btn btn-primary btn-sm">ضع تعليق</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </section>
+    <a asp-action="Index" class="btn btn-primary" role="button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+            <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z" />
+        </svg>
+        قائمة اللاعبين
+    </a>
 
 </div>
