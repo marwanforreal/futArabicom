@@ -34,17 +34,21 @@
                     <div>
                         <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">تسجيل الدخول</button>
                     </div>
-                    <div class="m-2">
-                        <p>
-                            <a id="forgot-password" asp-page="./ForgotPassword">هل نسيت كلمة المرور؟</a>
-                        </p>
-                        <p>
-                            <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">تسجيل كمستخدم جديد</a>
-                        </p>
-                        <p>
-                            <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">تأكيد البريد الالكتروني</a>
-                        </p>
-                    </div>
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="m-2">
+                            <p>
+                                <a id="forgot-password" asp-page="./ForgotPassword">هل نسيت كلمة المرور؟</a>
+                            </p>
+                            <p>
+                                <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">تسجيل كمستخدم جديد</a>
+                            </p>
+                            <p>
+                                <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">تأكيد البريد الالكتروني</a>
+                            </p>
+                        </div>
+                    }
                 </form>
             </section>
         </div>
