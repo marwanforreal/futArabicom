@@ -30,6 +30,8 @@ namespace futArabicom.Models
 
         public int? Physical { get; set; }
 
+        public DateTime lastUpdate { get; set; }
+
         public string? Type { get; set; }
 
         public byte[] Image { get; set; }

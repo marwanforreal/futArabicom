@@ -3,6 +3,8 @@ using futArabicom.Data;
 using futArabicom.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace futArabicom.Controllers
 {
@@ -45,6 +47,12 @@ namespace futArabicom.Controllers
 
             claim.User = getUserByUsername(User.Identity.Name);
 
+            if (claim.Player != null)
+            {
+                // Update the lastUpdate field for the player
+                claim.Player.lastUpdate = DateTime.Now; // You can set the appropriate date and time
+            }
+
             try
             {
                 _context.Claims.Add(claim);
@@ -57,6 +65,45 @@ namespace futArabicom.Controllers
              
 
             return RedirectToAction("Details", "Players", new PlayerDetailsViewModel { PlayerId = claim.Player.Id});
+        }
+
+        //[HttpGet]
+        //public IActionResult Delete(int? id)
+        //{
+        //    var player = _context.Players.SingleOrDefault(p => p.Id == id);
+
+        //    if (player == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return View(player);
+        //}
+
+        [HttpDelete]
+        public IActionResult Delete(Claims claim)
+        {
+            var fullClaim = _context.Claims.Where(p=> p.Id == claim.Id).Include(p => p.Player).FirstOrDefault();
+
+            if (claim == null)
+            {
+                // Handle the case where the claim doesn't exist.
+                return NotFound();
+            }
+
+            if (fullClaim.Player != null)
+            {
+                // Update the lastUpdate field for the player
+                fullClaim.Player.lastUpdate = DateTime.Now; // You can set the appropriate date and time
+            }
+
+            // Remove the claim
+            _context.Claims.Remove(fullClaim);
+            _context.SaveChanges();
+
+            //_context.Claims.Remove(claim);
+            //_context.SaveChanges();
+            return View("Index");
         }
 
         private Player getPlayerById(int playerId)

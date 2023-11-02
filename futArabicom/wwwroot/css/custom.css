@@ -73,6 +73,7 @@
     justify-content: center;
     overflow: hidden; /* Ensures the image doesn't overflow the circle */
     margin: auto;
+    margin-bottom: 10px;
 }
 
     .trending-cards img {
