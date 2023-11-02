@@ -200,12 +200,12 @@ namespace futArabicom.Controllers
             return View(player);
         }
 
-        [HttpDelete]
+        [HttpPost]
         public IActionResult Delete(Player player)
         {
             _context.Players.Remove(player);
             _context.SaveChanges();
-            return View("Index");
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
