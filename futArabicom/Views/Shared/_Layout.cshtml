@@ -15,6 +15,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300&display=swap" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-99EE5098FH"></script>
 </head>
 <body>
     <header>
@@ -22,7 +24,7 @@
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
                     <img src="~/Images/brand.png" style="height:30px;">
-                    لنقاطع من اجل فلسطين
+                    مُقاطع من اجل فلسطين
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -33,9 +35,9 @@
                         <li class="nav-item">
                             <a class="nav-link bg-richBlack-text" asp-area="" asp-controller="Home" asp-action="Index">الرئيسية</a>
                         </li>
-                        <li class="nav-item">
+@*                        <li class="nav-item">
                             <a class="nav-link bg-richBlack-text" asp-area="" asp-controller="Home" asp-action="Privacy">الخصوصية</a>
-                        </li>
+                        </li>*@
                         <li class="nav-item">
                             <a class="nav-link bg-richBlack-text" asp-area="" asp-controller="Players" asp-action="Index">قائمة الصفحات</a>
                         </li>
@@ -55,7 +57,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - لنقاطع من اجل فلسطين - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2023 - مُقاطع من اجل فلسطين @*- <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>*@
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

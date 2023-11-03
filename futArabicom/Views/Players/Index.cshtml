@@ -1,9 +1,19 @@
 ﻿@model IEnumerable<futArabicom.Models.Player>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "قائمة الصفحات";
     var count = 0;
     string cardType;
+}
+
+@section scripts{
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-99EE5098FH');
+    </script>
 }
 
 

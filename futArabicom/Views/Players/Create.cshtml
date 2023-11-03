@@ -7,8 +7,10 @@
 <hr />
 <div class="container">
 <div class="row justify-content-center">
-    <div class="col-md-4">
-        <p class="display-5">إضافة صفحة</p>
+      @if (User.Identity.IsAuthenticated)
+        {
+            <div class="col-md-4">
+                <p class="display-5">إضافة صفحة</p>
         <form method="post" asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -48,6 +50,15 @@
             </div>
         </form>
     </div>
+    }
+
+      @if (!User.Identity.IsAuthenticated)
+        {
+            <div class="alert alert-warning" role="alert">
+                الرجّاء تسجيل الدخول.
+            </div>
+        }
+
 </div>
 </div>
 
