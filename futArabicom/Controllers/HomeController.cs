@@ -19,7 +19,7 @@ namespace futArabicom.Controllers
         public IActionResult Index()
         {
             /*Trending players under the search bar list*/
-            var trendingPlayers = _context.Players.OrderByDescending(p => p.Id).Take(12).ToList();
+            var trendingPlayers = _context.Players.OrderBy(p => p.Id).Take(12).ToList();
 
             List<string> playerImagesUrls = new();
 

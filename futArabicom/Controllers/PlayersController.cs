@@ -104,7 +104,12 @@ namespace futArabicom.Controllers
                 ViewBag.imageUrl = imageDataUrl;
             }
 
-            var similarPlayers = _context.Players.OrderByDescending(p => p.Id).Take(6).ToList();
+            Random random = new Random();
+            //List<int> random12 = numbers.OrderBy(x => random.Next()).Take(12).ToList();
+
+            var allPlayers = _context.Players.ToList();
+
+            var similarPlayers = allPlayers.OrderBy(p => random.Next()).Take(6).ToList();
 
             viewModel.SimilarPlayers = similarPlayers;
 
