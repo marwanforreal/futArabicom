@@ -7,6 +7,13 @@
 
 <div class="container">
     <div class="row justify-content-center">
+            @if (!User.Identity.IsAuthenticated)
+        {
+            <div class="alert alert-warning" role="alert">
+                العضوّية متاحة عن طريق الدعوة فقط, لغايات التنظيم والتأكد من المصادر, شكراً لتفهمكم.
+            </div>
+        }
+
         <div class="col-md-4">
             <section>
                 <h1>@ViewData["Title"]</h1>
