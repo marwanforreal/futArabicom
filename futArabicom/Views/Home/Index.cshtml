@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<futArabicom.Models.Player>
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "الرئيسية";
     var count = 0;
 }
 
@@ -38,8 +38,8 @@
                 select: function (e, i) {
                     //$("#hfCustomer").val(i.item.val);
                     //I don't know what this part does.
-
-                    window.location.href = '/Players/Details?PlayerId=' + pageId;
+                    
+                    window.location.href = '/pages/details?pageId=' + pageId;
                     console.log(e);
                     console.log(i);
                     console.log(pageId);
@@ -63,14 +63,14 @@
     }
     @if (!User.Identity.IsAuthenticated)
     {
-        <p class="m-4">لست عضواً؟ <a class="text-decoration-none" href="https://docs.microsoft.com/aspnet/core">سجّل الان</a>.</p>
+        <p class="m-4">قاطع وتعرّف على أهم أسباب المقاطعة لكل شركة.</p>
     } else
     {
         <p class="m-4"> مرحباً بك <span class="text-primary">@User.Identity.Name</span></p>
     }
 
     <div class="alert alert-primary" role="alert">
-        هذا الموقع قيد تطوير. قد تكون بعض المعلومات خاطئة في الوقت الحالي.
+        هذا الموقع قيد تطوير. قد تكون بعض المعلومات غير متوفّرة في الوقت الحالي.
     </div>
 
     <!-- Trending Players-->
@@ -90,7 +90,7 @@
                 @foreach (var item in Model)
                 {
                     <div class="col-6 col-md-2">
-                        <a class="text-decoration-none" href="@Url.Action("Details", "Players", new PlayerDetailsViewModel { PlayerId = item.Id })">
+                        <a class="text-decoration-none" href="@Url.Action("Details", "Players", new PlayerDetailsViewModel { pageId = item.Id })">
                                 <div class="card m-0 bg-richBlack on-hover">
                                 @*<img id="trendingPlayerCard" src="@Url.Content("~/Images/" + item.Type + "Mini.png")" class="rounded mx-auto d-block position-relative" alt="FutArabi">*@
                                 <div class="trending-cards">

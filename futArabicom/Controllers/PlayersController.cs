@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace futArabicom.Controllers
 {
+    [Route("pages")]
     public class PlayersController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -19,6 +20,8 @@ namespace futArabicom.Controllers
         {
             _context = context; 
         }
+
+        [Route("index")]
         public IActionResult Index()
         {
             var data = _context.Players.ToList();
@@ -36,12 +39,14 @@ namespace futArabicom.Controllers
         }
 
         [HttpGet]
+        [Route("create")]
         public IActionResult Create()
         {
             return View();
         }
 
         [Authorize]
+        [Route("create")]
         [HttpPost]
         public IActionResult Create(Player player, IFormFile playerImage)
         {
@@ -78,9 +83,10 @@ namespace futArabicom.Controllers
         }
 
         [HttpGet]
+        [Route("details")]
         public IActionResult Details(PlayerDetailsViewModel pageModel)
         {
-            var currentPlayer = _context.Players.SingleOrDefault(p => p.Id == pageModel.PlayerId);
+            var currentPlayer = _context.Players.SingleOrDefault(p => p.Id == pageModel.pageId);
 
             PlayerDetailsViewModel viewModel = new PlayerDetailsViewModel()
             {
@@ -122,7 +128,7 @@ namespace futArabicom.Controllers
 
             var currentUserObject = _context.Users.FirstOrDefault(x => x.UserName == currentUserName);
 
-            var currentPlayerObject = _context.Players.FirstOrDefault(x => x.Id == pageModel.PlayerId);
+            var currentPlayerObject = _context.Players.FirstOrDefault(x => x.Id == pageModel.pageId);
 
             if (!ModelState.IsValid)
             {
@@ -150,9 +156,9 @@ namespace futArabicom.Controllers
 
             PlayerDetailsViewModel viewModel = new PlayerDetailsViewModel()
             {
-                Player = _context.Players.SingleOrDefault(p => p.Id == pageModel.PlayerId),
+                Player = _context.Players.SingleOrDefault(p => p.Id == pageModel.pageId),
                 Comments = fillComments,
-                PlayerId = currentPlayerObject.Id
+                pageId = currentPlayerObject.Id
             };
 
             return RedirectToAction("Details", viewModel);
@@ -170,6 +176,7 @@ namespace futArabicom.Controllers
         }
 
         [HttpGet]
+        [Route("edit")]
         public IActionResult Edit(int? id)
         {
             if(id == null || id == 0)
@@ -188,6 +195,7 @@ namespace futArabicom.Controllers
         }
 
         [HttpGet]
+        [Route("delete")]
         public IActionResult Delete(int? id)
         {
             var player = _context.Players.SingleOrDefault(p => p.Id == id); 
@@ -201,6 +209,7 @@ namespace futArabicom.Controllers
         }
 
         [HttpPost]
+        [Route("delete")]
         public IActionResult Delete(Player player)
         {
             _context.Players.Remove(player);
@@ -209,6 +218,7 @@ namespace futArabicom.Controllers
         }
 
         [HttpPost]
+        [Route("edit")]
         public IActionResult Edit(Player player)
         {
             var oldRecord = _context.Players.Where(p => p.Id == player.Id).Include(p => p.Claims).Include(x => x.Claims).FirstOrDefault(p => p.Id == player.Id);

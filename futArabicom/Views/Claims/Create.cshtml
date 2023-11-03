@@ -59,7 +59,7 @@
     <script>
         $(document).ready(function () {
             // Get the URL from the anchor link
-            var url = "@Url.Action("Details", "Players", new PlayerDetailsViewModel { PlayerId = 0 })";
+            var url = "@Url.Action("Details", "Players", new PlayerDetailsViewModel { pageId = 0 })";
 
             // Add a click event handler to the button
             $('#submitButton').click(function () {

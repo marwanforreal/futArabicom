@@ -64,7 +64,7 @@ namespace futArabicom.Controllers
             }
              
 
-            return RedirectToAction("Details", "Players", new PlayerDetailsViewModel { PlayerId = claim.Player.Id});
+            return RedirectToAction("Details", "Players", new PlayerDetailsViewModel { pageId = claim.Player.Id});
         }
 
         //[HttpGet]
