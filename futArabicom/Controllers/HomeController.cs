@@ -59,10 +59,10 @@ namespace futArabicom.Controllers
         {
             if (query == null)
             {
-                query = "Marwan";
+                query = "";
             }
 
-            var players = _context.Players.Where(p => p.Name.Contains(query)).ToList();
+            var players = _context.Players.Where(p => p.Name.ToLower().Contains(query.ToLower())).ToList();
 
             List<string> playerImagesUrls = new();
 
