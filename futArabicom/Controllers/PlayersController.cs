@@ -86,43 +86,43 @@ namespace futArabicom.Controllers
         [Route("details")]
         public IActionResult Details(PlayerDetailsViewModel pageModel)
         {
-            var currentPlayer = _context.Players.SingleOrDefault(p => p.Id == pageModel.pageId);
+                var currentPlayer = _context.Players.SingleOrDefault(p => p.Id == pageModel.pageId);
 
-            PlayerDetailsViewModel viewModel = new PlayerDetailsViewModel()
-            {
-                Player = currentPlayer,
-                Comments = _context.Comments.Where(p => p.Player == currentPlayer).Include(user => user.User).ToList(),
-                Claims = _context.Claims.Where(p => p.Player == currentPlayer).Include(user => user.User).ToList()
-            };
+                PlayerDetailsViewModel viewModel = new PlayerDetailsViewModel()
+                {
+                    Player = currentPlayer,
+                    Comments = _context.Comments.Where(p => p.Player == currentPlayer).Include(user => user.User).ToList(),
+                    Claims = _context.Claims.Where(p => p.Player == currentPlayer).Include(user => user.User).ToList()
+                };
 
-            //Player player = _context.Players.SingleOrDefault(p => p.Id == id);
+                //Player player = _context.Players.SingleOrDefault(p => p.Id == id);
 
-            if(viewModel.Player.Image != null)
-            {
-                var imageDataUrl = ExtractImageUrl(viewModel.Player);
+                if (viewModel.Player.Image != null)
+                {
+                    var imageDataUrl = ExtractImageUrl(viewModel.Player);
 
-                ViewBag.imageUrl = imageDataUrl;
-            }
+                    ViewBag.imageUrl = imageDataUrl;
+                }
 
-            Random random = new Random();
-            //List<int> random12 = numbers.OrderBy(x => random.Next()).Take(12).ToList();
+                Random random = new Random();
+                //List<int> random12 = numbers.OrderBy(x => random.Next()).Take(12).ToList();
 
-            var allPlayers = _context.Players.ToList();
+                var allPlayers = _context.Players.ToList();
 
-            var similarPlayers = allPlayers.OrderBy(p => random.Next()).Take(6).ToList();
+                var similarPlayers = allPlayers.OrderBy(p => random.Next()).Take(6).ToList();
 
-            viewModel.SimilarPlayers = similarPlayers;
+                viewModel.SimilarPlayers = similarPlayers;
 
-            List<string> similarPlayerImagesUrls = new();
+                List<string> similarPlayerImagesUrls = new();
 
-            foreach (Player player in similarPlayers)
-            {
-                similarPlayerImagesUrls.Add(ExtractImageUrl(player));
-            }
+                foreach (Player player in similarPlayers)
+                {
+                    similarPlayerImagesUrls.Add(ExtractImageUrl(player));
+                }
 
-            ViewBag.imageUrls = similarPlayerImagesUrls;
+                ViewBag.imageUrls = similarPlayerImagesUrls;
 
-            return View("Details", viewModel);
+                return View("Details", viewModel);
         }
 
 

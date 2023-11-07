@@ -14,7 +14,6 @@
 
     <script type="text/javascript">
         $(function () {
-            var pageId;
             $("#txtSearch").autocomplete({
                 source: function (request, response) {
                     $.ajax({
@@ -23,8 +22,10 @@
                         type: "GET",
                         success: function (data) {
                             response($.map(data, function (item) {
-                                pageId = item.id;
-                                return item.name;
+                                return {
+                                    label: item.name,
+                                    value: item.id // Store the unique pageId for each item
+                                };
                             }))
                         },
                         error: function (response) {
@@ -38,6 +39,8 @@
                 select: function (e, i) {
                     //$("#hfCustomer").val(i.item.val);
                     //I don't know what this part does.
+
+                    var pageId = i.item.value;
                     
                     window.location.href = '/pages/details?pageId=' + pageId;
                     console.log(e);
