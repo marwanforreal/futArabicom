@@ -181,29 +181,10 @@ namespace futArabicom.Controllers
         }
 
         [HttpGet]
-        [Route("edit")]
-        public IActionResult Edit(int? id)
-        {
-            if(id == null || id == 0)
-            {
-                return NotFound();
-            }
-
-            var player = _context.Players.SingleOrDefault(p =>p.Id == id);
-
-            if(player == null)
-            {
-                return NotFound();
-            }
-
-            return View(player);
-        }
-
-        [HttpGet]
         [Route("delete")]
         public IActionResult Delete(int? id)
         {
-            var player = _context.Players.SingleOrDefault(p => p.Id == id); 
+            var player = _context.Players.Include(p => p.Comments).Include(p => p.Claims).SingleOrDefault(p => p.Id == id); 
 
             if(player == null)
             {
@@ -224,18 +205,31 @@ namespace futArabicom.Controllers
 
         [HttpPost]
         [Route("edit")]
-        public IActionResult Edit(Player player)
+        public IActionResult Edit(PlayerEditModel player, IFormFile? playerImage = null)
         {
-            var oldRecord = _context.Players.Where(p => p.Id == player.Id).Include(p => p.Claims).Include(x => x.Claims).FirstOrDefault(p => p.Id == player.Id);
+            Player currPlayer = _context.Players.Include(p => p.Comments).Include(p => p.Claims).FirstOrDefault(p => p.Id == player.Id);
 
-            player.Image = oldRecord.Image;
-            player.Claims = oldRecord.Claims;
-            player.Comments = oldRecord.Comments; 
-
-            if(player.Image == null)
+            if (player == null)
             {
-                player.Image = new byte[0];  
+                // Handle the case when the player doesn't exist
+                return NotFound(); // Or any other appropriate response
             }
+
+            currPlayer.Name = player.Name;
+            currPlayer.NameAr = player.NameAr;
+            currPlayer.Country = player.Country;
+            currPlayer.Description = player.Description;
+
+            if(playerImage != null)
+            {
+                var imageData = TransformImageData(playerImage);
+                currPlayer.Image = imageData;
+            }
+
+            ModelState.Clear();
+            var x = TryValidateModel(currPlayer);
+
+
 
             if (!ModelState.IsValid)
             {
@@ -243,10 +237,28 @@ namespace futArabicom.Controllers
                 return View();
             }
 
-            _context.Players.Update(player);
             _context.SaveChanges();
 
             return View();
+        }
+
+        [HttpGet]
+        [Route("edit")]
+        public IActionResult Edit(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+
+            var player = _context.Players.SingleOrDefault(p => p.Id == id);
+
+            if (player == null)
+            {
+                return NotFound();
+            }
+
+            return View(new PlayerEditModel { Name = player.Name, NameAr = player.NameAr, Country = player.Country, Description = player.Description, Id = player.Id });
         }
     }
 }
