@@ -26,6 +26,10 @@ namespace futArabicom.Controllers
         {
             var data = _context.Players.ToList();
 
+            var _rand = new Random();
+
+            data = data.OrderBy(_ => _rand.Next()).ToList();
+
             List<string> playerImagesUrls = new();
 
             foreach (Player player in data)
