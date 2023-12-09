@@ -8,7 +8,7 @@ namespace futArabicom.Data
     public class ApplicationDbContext : IdentityDbContext<User>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> option) : base(option) {
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
         }
 
         public DbSet<Player> Players { get; set; }
