@@ -19,7 +19,7 @@ namespace futArabicom.Controllers
         public IActionResult Index()
         {
             /*Trending players under the search bar list*/
-            var trendingPlayers = _context.Players.OrderByDescending(p => p.Id).Take(12).ToList();
+            var trendingPlayers = _context.Players.OrderBy(p => p.Id).Take(12).ToList();
 
             List<string> playerImagesUrls = new();
 
@@ -37,14 +37,32 @@ namespace futArabicom.Controllers
             return View();
         }
 
+        [HttpGet]
+        public JsonResult AutoComplete(string prefix)
+        {
+            // var pages = _context.Players.Where(p => p.Name.ToLower().StartsWith(prefix.ToLower())).Select(p => p.Name).ToList();
+
+            //return Json(pages);
+            var players = _context.Players
+                    .Where(p => p.Name.ToLower().StartsWith(prefix.ToLower()))
+                     .Select(p => new
+                        {
+                            Id = p.Id,
+                            Name = p.Name
+                        })
+                    .ToList();
+
+            return Json(players);
+        }
+
         public IActionResult Search(string query)
         {
             if (query == null)
             {
-                query = "Marwan";
+                query = "";
             }
 
-            var players = _context.Players.Where(p => p.Name.Contains(query)).ToList();
+            var players = _context.Players.Where(p => p.Name.ToLower().Contains(query.ToLower())).ToList();
 
             List<string> playerImagesUrls = new();
 

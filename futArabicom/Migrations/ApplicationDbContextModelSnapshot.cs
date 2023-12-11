@@ -149,6 +149,42 @@ namespace futArabicom.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("futArabicom.Areas.Identity.Data.Claims", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("PlayerId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Source")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("claimDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("isVerified")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("timeStamp")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PlayerId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Claims");
+                });
+
             modelBuilder.Entity("futArabicom.Areas.Identity.Data.Comment", b =>
                 {
                     b.Property<int>("Id")
@@ -156,10 +192,9 @@ namespace futArabicom.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Content")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("PlayerId")
+                    b.Property<int?>("PlayerId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("UserId")
@@ -247,8 +282,16 @@ namespace futArabicom.Migrations
                     b.Property<string>("Club")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<int?>("Defending")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<int?>("Dribbling")
                         .HasColumnType("INTEGER");
@@ -258,6 +301,10 @@ namespace futArabicom.Migrations
                         .HasColumnType("BLOB");
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NameAr")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -274,6 +321,9 @@ namespace futArabicom.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Type")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("lastUpdate")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -332,17 +382,34 @@ namespace futArabicom.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("futArabicom.Areas.Identity.Data.Claims", b =>
+                {
+                    b.HasOne("futArabicom.Models.Player", "Player")
+                        .WithMany("Claims")
+                        .HasForeignKey("PlayerId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("futArabicom.Areas.Identity.Data.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Player");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("futArabicom.Areas.Identity.Data.Comment", b =>
                 {
                     b.HasOne("futArabicom.Models.Player", "Player")
                         .WithMany("Comments")
                         .HasForeignKey("PlayerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("futArabicom.Areas.Identity.Data.User", "User")
                         .WithMany("Comments")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Player");
 
@@ -356,6 +423,8 @@ namespace futArabicom.Migrations
 
             modelBuilder.Entity("futArabicom.Models.Player", b =>
                 {
+                    b.Navigation("Claims");
+
                     b.Navigation("Comments");
                 });
 #pragma warning restore 612, 618

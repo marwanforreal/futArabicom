@@ -8,8 +8,12 @@ namespace futArabicom.Models
 
         public IEnumerable<Comment>? Comments { get; set; }
 
+        public IEnumerable<Claims>? Claims { get; set; }
+
         public Comment? NewComment { get; set; }
 
-        public int? PlayerId { get; set; }
+        public int? pageId { get; set; }
+
+        public List<Player> SimilarPlayers { get; set; }
     }
 }

@@ -4,10 +4,7 @@
 }
 
 #playerFace {
-    position: absolute;
     width: 35%;
-    top: 16%;
-    right: 30%;
 }
 
 #trendingPlayerCard {
@@ -28,9 +25,75 @@
 }
 
     .bg-minionYellow-text {
-        color: #F4E04D !important;
+        color: #FFFFFF !important;
     }
 
 .bg-minionYellow {
     background-color: #F4E04D;
+}
+
+.circle {
+    width: 150px; /* Adjust the width and height as needed */
+    height: 150px;
+    background-color: #ededed;
+    border: solid 1px #c7c5c5;
+    border-radius: 15%; /* Makes the div a perfect circle */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Ensures the image doesn't overflow the circle */
+    margin: auto;
+}
+
+    .circle img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+.voting-circle {
+    width: 50px; /* Adjust the width and height as needed */
+    height: 50px;
+    border: 1px solid #05530e;
+    background-color: #FFFFFF;
+    border-radius: 50%; /* Makes the div a perfect circle */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Ensures the image doesn't overflow the circle */
+    margin: auto;
+}
+
+.trending-cards {
+    width: 150px; /* Adjust the width and height as needed */
+    height: 150px;
+    background-color: #eeef;
+    display: flex;
+    border-radius: 25%;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Ensures the image doesn't overflow the circle */
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+    .trending-cards img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+.alert-table {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: solid 1px #dbd8d8;
+    padding: 5px;
+    border-radius: 15px;
+}
+
+
+@media (max-width: 768px) {
+    .trending-cards {
+        height: 115px; /* Override the background color for mobile screens */
+        width: 115px; /* Override the text color for mobile screens */
+        margin-bottom: 10px;
+    }
 }

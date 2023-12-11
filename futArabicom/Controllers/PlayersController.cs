@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace futArabicom.Controllers
 {
+    [Route("pages")]
     public class PlayersController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -19,9 +20,15 @@ namespace futArabicom.Controllers
         {
             _context = context; 
         }
+
+        [Route("index")]
         public IActionResult Index()
         {
             var data = _context.Players.ToList();
+
+            var _rand = new Random();
+
+            data = data.OrderBy(_ => _rand.Next()).ToList();
 
             List<string> playerImagesUrls = new();
 
@@ -36,12 +43,14 @@ namespace futArabicom.Controllers
         }
 
         [HttpGet]
+        [Route("create")]
         public IActionResult Create()
         {
             return View();
         }
 
         [Authorize]
+        [Route("create")]
         [HttpPost]
         public IActionResult Create(Player player, IFormFile playerImage)
         {
@@ -78,27 +87,48 @@ namespace futArabicom.Controllers
         }
 
         [HttpGet]
+        [Route("details")]
         public IActionResult Details(PlayerDetailsViewModel pageModel)
         {
-            var currentPlayer = _context.Players.SingleOrDefault(p => p.Id == pageModel.PlayerId);
+                var currentPlayer = _context.Players.SingleOrDefault(p => p.Id == pageModel.pageId);
 
-            PlayerDetailsViewModel viewModel = new PlayerDetailsViewModel()
-            {
-                Player = currentPlayer,
-                Comments = _context.Comments.Where(p => p.Player == currentPlayer).Include(user => user.User).ToList()
-            };
+                PlayerDetailsViewModel viewModel = new PlayerDetailsViewModel()
+                {
+                    Player = currentPlayer,
+                    Comments = _context.Comments.Where(p => p.Player == currentPlayer).Include(user => user.User).ToList(),
+                    Claims = _context.Claims.Where(p => p.Player == currentPlayer).Include(user => user.User).ToList()
+                };
 
-            //Player player = _context.Players.SingleOrDefault(p => p.Id == id);
+                //Player player = _context.Players.SingleOrDefault(p => p.Id == id);
 
-            if(viewModel.Player.Image != null)
-            {
-                var imageDataUrl = ExtractImageUrl(viewModel.Player);
+                if (viewModel.Player.Image != null)
+                {
+                    var imageDataUrl = ExtractImageUrl(viewModel.Player);
 
-                ViewBag.imageUrl = imageDataUrl;
-            }
+                    ViewBag.imageUrl = imageDataUrl;
+                }
 
-            return View("Details", viewModel);
+                Random random = new Random();
+                //List<int> random12 = numbers.OrderBy(x => random.Next()).Take(12).ToList();
+
+                var allPlayers = _context.Players.ToList();
+
+                var similarPlayers = allPlayers.OrderBy(p => random.Next()).Take(6).ToList();
+
+                viewModel.SimilarPlayers = similarPlayers;
+
+                List<string> similarPlayerImagesUrls = new();
+
+                foreach (Player player in similarPlayers)
+                {
+                    similarPlayerImagesUrls.Add(ExtractImageUrl(player));
+                }
+
+                ViewBag.imageUrls = similarPlayerImagesUrls;
+
+                return View("Details", viewModel);
         }
+
 
         [HttpPost]
         public async Task<IActionResult> addComment(PlayerDetailsViewModel pageModel)
@@ -107,7 +137,7 @@ namespace futArabicom.Controllers
 
             var currentUserObject = _context.Users.FirstOrDefault(x => x.UserName == currentUserName);
 
-            var currentPlayerObject = _context.Players.FirstOrDefault(x => x.Id == pageModel.PlayerId);
+            var currentPlayerObject = _context.Players.FirstOrDefault(x => x.Id == pageModel.pageId);
 
             if (!ModelState.IsValid)
             {
@@ -135,9 +165,9 @@ namespace futArabicom.Controllers
 
             PlayerDetailsViewModel viewModel = new PlayerDetailsViewModel()
             {
-                Player = _context.Players.SingleOrDefault(p => p.Id == pageModel.PlayerId),
+                Player = _context.Players.SingleOrDefault(p => p.Id == pageModel.pageId),
                 Comments = fillComments,
-                PlayerId = currentPlayerObject.Id
+                pageId = currentPlayerObject.Id
             };
 
             return RedirectToAction("Details", viewModel);
@@ -155,27 +185,10 @@ namespace futArabicom.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(int? id)
-        {
-            if(id == null || id == 0)
-            {
-                return NotFound();
-            }
-
-            var player = _context.Players.SingleOrDefault(p =>p.Id == id);
-
-            if(player == null)
-            {
-                return NotFound();
-            }
-
-            return View(player);
-        }
-
-        [HttpGet]
+        [Route("delete")]
         public IActionResult Delete(int? id)
         {
-            var player = _context.Players.SingleOrDefault(p => p.Id == id); 
+            var player = _context.Players.Include(p => p.Comments).Include(p => p.Claims).SingleOrDefault(p => p.Id == id); 
 
             if(player == null)
             {
@@ -185,21 +198,42 @@ namespace futArabicom.Controllers
             return View(player);
         }
 
-        [HttpDelete]
+        [HttpPost]
+        [Route("delete")]
         public IActionResult Delete(Player player)
         {
             _context.Players.Remove(player);
             _context.SaveChanges();
-            return View("Index");
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
-        public IActionResult Edit(Player player)
+        [Route("edit")]
+        public IActionResult Edit(PlayerEditModel player, IFormFile? playerImage = null)
         {
-            if(player.Image == null)
+            Player currPlayer = _context.Players.Include(p => p.Comments).Include(p => p.Claims).FirstOrDefault(p => p.Id == player.Id);
+
+            if (player == null)
             {
-                player.Image = new byte[0];  
+                // Handle the case when the player doesn't exist
+                return NotFound(); // Or any other appropriate response
             }
+
+            currPlayer.Name = player.Name;
+            currPlayer.NameAr = player.NameAr;
+            currPlayer.Country = player.Country;
+            currPlayer.Description = player.Description;
+
+            if(playerImage != null)
+            {
+                var imageData = TransformImageData(playerImage);
+                currPlayer.Image = imageData;
+            }
+
+            ModelState.Clear();
+            var x = TryValidateModel(currPlayer);
+
+
 
             if (!ModelState.IsValid)
             {
@@ -207,10 +241,28 @@ namespace futArabicom.Controllers
                 return View();
             }
 
-            _context.Players.Update(player);
             _context.SaveChanges();
 
             return View();
+        }
+
+        [HttpGet]
+        [Route("edit")]
+        public IActionResult Edit(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+
+            var player = _context.Players.SingleOrDefault(p => p.Id == id);
+
+            if (player == null)
+            {
+                return NotFound();
+            }
+
+            return View(new PlayerEditModel { Name = player.Name, NameAr = player.NameAr, Country = player.Country, Description = player.Description, Id = player.Id });
         }
     }
 }
