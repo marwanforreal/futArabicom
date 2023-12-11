@@ -1,25 +1,29 @@
-#See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
-
-#Depending on the operating system of the host machines(s) that will build or run the containers, the image specified in the FROM statement may need to be changed.
-#For more information, please see https://aka.ms/containercompat
-
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
-WORKDIR /app
-EXPOSE 80
-EXPOSE 443
-
+# Stage 1: Build the application
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
+
+# Copy the project file and restore dependencies
 COPY ["futArabicom/futArabicom.csproj", "futArabicom/"]
 RUN dotnet restore "futArabicom/futArabicom.csproj"
+
+# Copy the remaining source code and build the application
 COPY . .
 WORKDIR "/src/futArabicom"
 RUN dotnet build "futArabicom.csproj" -c Release -o /app/build
 
+# Stage 2: Publish the application
 FROM build AS publish
 RUN dotnet publish "futArabicom.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
-FROM base AS final
+# Stage 3: Create the final runtime image
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS final
 WORKDIR /app
+
+# Copy the published application
 COPY --from=publish /app/publish .
+
+# Copy the SQLite database file into the container
+COPY ["futArabicom/database.db", "."]
+
+# Set the entry point for the application
 ENTRYPOINT ["dotnet", "futArabicom.dll"]
