@@ -8,6 +8,7 @@ using System.Net.NetworkInformation;
 using futArabicom.Areas.Identity.Data;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace futArabicom.Controllers
 {
@@ -29,6 +30,24 @@ namespace futArabicom.Controllers
             var _rand = new Random();
 
             data = data.OrderBy(_ => _rand.Next()).ToList();
+
+            List<string> playerImagesUrls = new();
+
+            foreach (Player player in data)
+            {
+                playerImagesUrls.Add(ExtractImageUrl(player));
+            }
+
+            ViewBag.imageUrls = playerImagesUrls;
+
+            return View("Index", data);
+        }
+
+        [HttpGet]
+        [Route("index/{category}")]
+        public IActionResult FilterByType(string? category)
+        {
+            var data = _context.Players.Where(p => p.Type == category).ToList();
 
             List<string> playerImagesUrls = new();
 
