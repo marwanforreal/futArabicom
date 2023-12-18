@@ -25,11 +25,7 @@ namespace futArabicom.Controllers
         [Route("index")]
         public IActionResult Index()
         {
-            var data = _context.Players.ToList();
-
-            var _rand = new Random();
-
-            data = data.OrderBy(_ => _rand.Next()).ToList();
+            var data = _context.Players.OrderByDescending(p => p.Id).ToList();
 
             List<string> playerImagesUrls = new();
 
