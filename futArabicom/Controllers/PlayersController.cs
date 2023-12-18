@@ -265,6 +265,8 @@ namespace futArabicom.Controllers
                 currPlayer.Image = imageData;
             }
 
+            currPlayer.lastUpdate = DateTime.UtcNow;
+
             ModelState.Clear();
             var x = TryValidateModel(currPlayer);
 
