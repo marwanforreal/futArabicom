@@ -8,6 +8,7 @@ using System.Net.NetworkInformation;
 using futArabicom.Areas.Identity.Data;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace futArabicom.Controllers
 {
@@ -24,11 +25,25 @@ namespace futArabicom.Controllers
         [Route("index")]
         public IActionResult Index()
         {
-            var data = _context.Players.ToList();
+            var data = _context.Players.OrderByDescending(p => p.Id).ToList();
 
-            var _rand = new Random();
+            List<string> playerImagesUrls = new();
 
-            data = data.OrderBy(_ => _rand.Next()).ToList();
+            foreach (Player player in data)
+            {
+                playerImagesUrls.Add(ExtractImageUrl(player));
+            }
+
+            ViewBag.imageUrls = playerImagesUrls;
+
+            return View("Index", data);
+        }
+
+        [HttpGet]
+        [Route("index/{category}")]
+        public IActionResult FilterByType(string? category)
+        {
+            var data = _context.Players.Where(p => p.Type == category).ToList();
 
             List<string> playerImagesUrls = new();
 
@@ -219,16 +234,34 @@ namespace futArabicom.Controllers
                 return NotFound(); // Or any other appropriate response
             }
 
-            currPlayer.Name = player.Name;
-            currPlayer.NameAr = player.NameAr;
-            currPlayer.Country = player.Country;
-            currPlayer.Description = player.Description;
+            if(player.Name != null) {
+                currPlayer.Name = player.Name;
+            }
+            
+            if(player.NameAr != null) {
+                currPlayer.NameAr = player.NameAr;
+            }
+            
+            if(player.Country != null) { 
+                currPlayer.Country = player.Country;
+            }
+            
+            if(player.Description != null) { 
+                currPlayer.Description = player.Description;
+            }
+            
+            if(player.Type != null) { 
+                currPlayer.Type = player.Type;
+            }
 
-            if(playerImage != null)
+
+            if (playerImage != null)
             {
                 var imageData = TransformImageData(playerImage);
                 currPlayer.Image = imageData;
             }
+
+            currPlayer.lastUpdate = DateTime.UtcNow;
 
             ModelState.Clear();
             var x = TryValidateModel(currPlayer);
